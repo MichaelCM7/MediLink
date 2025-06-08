@@ -44,7 +44,7 @@ api.interceptors.response.use(
 // Auth API endpoints
 export const authAPI = {
   // User registration
-  registerUser: (userData) => api.post('/auth/register/user', userData),
+  registerUser: (userData) => api.post('/auth/register/patients', userData),
   
   // Doctor registration
   registerDoctor: (doctorData) => api.post('/auth/register/doctor', doctorData),

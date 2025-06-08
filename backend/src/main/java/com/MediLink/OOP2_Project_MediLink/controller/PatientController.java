@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/patients")
+@RequestMapping("/auth")
 public class PatientController {
 
     @Autowired
     private PatientRepository patientRepository;
 
-    @PostMapping
+    @PostMapping("/register/patients")
     public PatientResponseDTO createPatient(@Valid @RequestBody PatientRequestDTO request) {
         Patient patient = PatientMapper.toEntity(request);
         Patient saved = patientRepository.save(patient);

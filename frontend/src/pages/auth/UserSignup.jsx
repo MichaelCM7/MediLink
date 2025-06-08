@@ -7,7 +7,7 @@ import { validateForm } from '../../utils/validators';
 import { ButtonLoader } from '../../components/common/LoadingSpinner';
 
 const UserSignup = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ 
     firstName: '',
     lastName: '',
     email: '',
