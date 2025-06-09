@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Heart, User, Mail, Phone } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { ROUTES, USER_ROLES } from '../../utils/constants';
+import { ROUTES, USER_ROLES } from '../../utils/constant';
 import { validateForm } from '../../utils/validators';
 import { ButtonLoader } from '../../components/common/LoadingSpinner';
 
 const UserSignup = () => {
-  const [formData, setFormData] = useState({ 
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -35,8 +35,8 @@ const UserSignup = () => {
     password: [{ type: 'required' }, { type: 'password' }],
     confirmPassword: [
       { type: 'required' },
-      { 
-        type: 'custom', 
+      {
+        type: 'custom',
         validator: (value, formData) => {
           if (value !== formData.password) {
             return 'Passwords do not match';
@@ -49,8 +49,8 @@ const UserSignup = () => {
     dateOfBirth: [{ type: 'required' }],
     gender: [{ type: 'required' }],
     agreedToTerms: [
-      { 
-        type: 'custom', 
+      {
+        type: 'custom',
         validator: (value) => value ? null : 'You must agree to the terms and conditions'
       }
     ]
@@ -74,9 +74,9 @@ const UserSignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const { isValid, errors: validationErrors } = validateForm(formData, validationRules);
-    
+
     if (!isValid) {
       setErrors(validationErrors);
       return;
@@ -86,7 +86,7 @@ const UserSignup = () => {
 
     try {
       const result = await register(formData, USER_ROLES.PATIENT);
-      
+
       if (result.success) {
         // Show success message and redirect to login
         alert('Registration successful! Please check your email to verify your account.');
@@ -153,79 +153,80 @@ const UserSignup = () => {
                 </div>
               </div>
 
+              {/* Email Address */}
               <div className="form-group">
                 <label className="form-label">Email Address *</label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <div className="input-with-icon">
+                  <Mail />
                   <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={`form-input pl-10 ${errors.email ? 'error' : ''}`}
-                    placeholder="Enter your email address"
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`form-input ${errors.email ? 'error' : ''}`}
+                      placeholder="Enter your email address"
                   />
                 </div>
                 {errors.email && <div className="form-error">{errors.email}</div>}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="form-group">
-                  <label className="form-label">Password *</label>
-                  <div className="relative">
-                    <input
+              {/* Password */}
+              <div className="form-group">
+                <label className="form-label">Password *</label>
+                <div className="input-with-toggle">
+                  <input
                       type={showPassword ? 'text' : 'password'}
                       name="password"
                       value={formData.password}
                       onChange={handleInputChange}
-                      className={`form-input pr-10 ${errors.password ? 'error' : ''}`}
+                      className={`form-input ${errors.password ? 'error' : ''}`}
                       placeholder="Create a strong password"
-                    />
-                    <button
+                  />
+                  <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                    >
-                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                    </button>
-                  </div>
-                  {errors.password && <div className="form-error">{errors.password}</div>}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? <EyeOff /> : <Eye />}
+                  </button>
                 </div>
+                {errors.password && <div className="form-error">{errors.password}</div>}
+              </div>
 
-                <div className="form-group">
-                  <label className="form-label">Confirm Password *</label>
-                  <div className="relative">
-                    <input
+              <div className="form-group">
+                <label className="form-label">Confirm Password *</label>
+                <div className="input-with-toggle">
+                  <input
                       type={showConfirmPassword ? 'text' : 'password'}
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className={`form-input pr-10 ${errors.confirmPassword ? 'error' : ''}`}
+                      className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
                       placeholder="Confirm your password"
-                    />
-                    <button
+                  />
+                  <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                    >
-                      {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                    </button>
-                  </div>
-                  {errors.confirmPassword && <div className="form-error">{errors.confirmPassword}</div>}
+                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showConfirmPassword ? <EyeOff /> : <Eye />}
+                  </button>
                 </div>
+                {errors.confirmPassword && <div className="form-error">{errors.confirmPassword}</div>}
               </div>
 
+              {/* Phone Number */}
               <div className="form-group">
                 <label className="form-label">Phone Number *</label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <div className="input-with-icon">
+                  <Phone />
                   <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className={`form-input pl-10 ${errors.phone ? 'error' : ''}`}
-                    placeholder="(555) 123-4567"
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`form-input ${errors.phone ? 'error' : ''}`}
+                      placeholder="(555) 123-4567"
                   />
                 </div>
                 {errors.phone && <div className="form-error">{errors.phone}</div>}

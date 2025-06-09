@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { authAPI } from '../services/api';
-import { USER_ROLES, STORAGE_KEYS } from '../utils/constants';
+import { USER_ROLES, STORAGE_KEYS } from '../utils/constant';
 
 // Initial state
 const initialState = {

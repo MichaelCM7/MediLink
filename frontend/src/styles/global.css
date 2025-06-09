@@ -1,0 +1,263 @@
+/* Make single fields full width inside the form container */
+.form-single {
+    width: 100%;
+}
+
+/* Inputs inside full width containers */
+.form-single input.form-input,
+.form-single select.form-select {
+    width: 100%;
+    display: block;
+}
+
+/* Grid for 2 columns, same as before */
+.grid-cols-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    align-items: start;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Global form container */
+form.space-y-6 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* spacing between blocks */
+}
+
+/* Grid for two columns */
+.grid-cols-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    align-items: start;
+}
+
+/* Form groups to ensure vertical spacing inside columns */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Inputs, selects and buttons consistent height */
+input.form-input,
+select.form-select,
+button.btn {
+    height: 48px; /* consistent height */
+    padding: 0 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Button styling consistent with previous */
+button.btn-primary {
+    background-color: #2563eb; /* Tailwind's blue-600 */
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover:not(:disabled) {
+    background-color: #1e40af; /* Tailwind's blue-800 */
+}
+
+/* Disabled button */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Error styles */
+input.error,
+select.error {
+    border-color: #dc2626; /* Tailwind red-600 */
+}
+
+.form-error {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+/* Icons inside inputs */
+.relative {
+    position: relative;
+}
+
+.relative svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af; /* Tailwind gray-400 */
+    pointer-events: none;
+}
+
+input.pl-10 {
+    padding-left: 38px; /* space for icon */
+}
+
+/* Password toggle button */
+.relative button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0;
+}
+
+/* Ensure the input container takes full width */
+.input-with-icon,
+.input-with-toggle {
+    position: relative;
+    width: 100%;
+}
+
+/* Icon on left, vertically centered */
+.input-with-icon svg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #9ca3af;
+    width: 20px;
+    height: 20px;
+}
+
+/* Input with left icon padding */
+.input-with-icon input {
+    width: 100%;
+    padding-left: 40px; /* space for icon */
+    box-sizing: border-box;
+}
+
+/* Password input container */
+.input-with-toggle {
+    position: relative;
+    width: 100%;
+}
+
+/* Toggle button on right, vertically centered */
+.input-with-toggle button {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Input with right toggle padding */
+.input-with-toggle input {
+    width: 100%;
+    padding-right: 40px; /* space for toggle */
+    box-sizing: border-box;
+}
+
+
+.relative button:hover {
+    color: #6b7280; /* Tailwind gray-500 */
+}
+
+/* Checkbox and label */
+input[type="checkbox"].mt-1 {
+    margin-top: 0.25rem; /* 4px */
+}
+
+.flex.items-start.space-x-3 {
+    gap: 12px;
+    align-items: flex-start;
+}
+
+/* Container width */
+.max-w-2xl {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* Card style */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    padding: 30px;
+}
+
+/* Card body */
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Text Center block */
+.text-center.mb-8 {
+    margin-bottom: 32px;
+}
+
+/* Heading and subtitle styling */
+.text-2xl {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.text-gray-900 {
+    color: #111827;
+}
+
+.text-gray-600 {
+    color: #4b5563;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+/* Links */
+.text-primary-blue {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.text-primary-blue:hover {
+    text-decoration: underline;
+}
+
+/* Responsive - stack single columns on small screens */
+@media (max-width: 768px) {
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
