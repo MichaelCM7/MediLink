@@ -95,6 +95,7 @@ const UserSignup = () => {
         setErrors({ submit: result.error || 'Registration failed. Please try again.' });
       }
     } catch (error) {
+      console.error('Registration error:', error);
       setErrors({ submit: 'An unexpected error occurred. Please try again.' });
     } finally {
       setIsLoading(false);
