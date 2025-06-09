@@ -1,0 +1,6 @@
+{
+  "name": "MediLink",
+  "short_name": "MediLink",
+  "start_url": "/",
+  "display": "standalone"
+}
