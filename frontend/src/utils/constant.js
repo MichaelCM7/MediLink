@@ -4,8 +4,16 @@ export const ROUTES = {
     HOME: '/',
     LOGIN: '/login',
     SIGNUP: '/signup',
+    USER_LOGIN: '/user/login',
+    USER_SIGNUP: '/user/signup',
+    DOCTOR_LOGIN: '/doctor/login',
+    DOCTOR_SIGNUP: '/doctor/signup',
+    ADMIN_LOGIN: '/admin/login',
+    ADMIN_SIGNUP: '/admin/signup',
     DASHBOARD: '/dashboard',
     PROFILE: '/profile',
+    USER_DASHBOARD: '/user/dashboard',
+    // ...add other routes as needed
 };
 
 export const STORAGE_KEYS = {

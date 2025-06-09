@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -52,5 +53,24 @@ public class PatientController {
     @DeleteMapping("/{id}")
     public void deletePatient(@PathVariable String id) {
         patientRepository.deleteById(id);
+    }
+
+    @PostMapping("/login/patients")
+    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+
+        Patient patient = patientRepository.findByEmail(email);
+        if (patient == null) {
+            return ResponseEntity.status(401).body("Invalid email or password.");
+        }
+
+        // Simple password check (replace with hashed password check in production)
+        if (!patient.getPassword().equals(password)) {
+            return ResponseEntity.status(401).body("Invalid email or password.");
+        }
+
+        // You can return a DTO or token here as needed
+        return ResponseEntity.ok(PatientMapper.toDTO(patient));
     }
 }

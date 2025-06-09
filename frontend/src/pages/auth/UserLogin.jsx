@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, Heart, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { ROUTES, USER_ROLES } from '../../utils/constants';
+import { ROUTES, USER_ROLES } from '../../utils/constant';
 import { validateEmail } from '../../utils/validators';
 import { ButtonLoader } from '../../components/common/LoadingSpinner';
 
@@ -80,6 +80,7 @@ const UserLogin = () => {
         setErrors({ submit: result.error || 'Login failed. Please check your credentials.' });
       }
     } catch (error) {
+      console.error('Login error:', error);
       setErrors({ submit: 'An unexpected error occurred. Please try again.' });
     } finally {
       setIsLoading(false);
