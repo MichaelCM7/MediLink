@@ -13,7 +13,7 @@ import {
   MapPin
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { ROUTES } from '../../utils/constants';
+import { ROUTES } from '../../utils/constant';
 import { formatDate } from '../../utils/helpers';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
@@ -97,6 +97,17 @@ const UserDashboard = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <LoadingSpinner size="lg" text="Loading your dashboard..." />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold mb-4">You are not logged in.</h2>
+          <Link to={ROUTES.USER_LOGIN} className="btn btn-primary">Go to Login</Link>
+        </div>
       </div>
     );
   }

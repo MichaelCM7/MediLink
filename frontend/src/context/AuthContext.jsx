@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
   // Load user from token
   const loadUser = async () => {
     const token = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
-    
+
     if (!token) {
       dispatch({ type: AUTH_ACTIONS.LOAD_USER_FAILURE, payload: 'No token found' });
       return;
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Get user data from localStorage first
       const userData = localStorage.getItem(STORAGE_KEYS.USER_DATA);
-      if (userData) {
+      if (userData && userData !== 'undefined') {
         const parsedUser = JSON.parse(userData);
         dispatch({
           type: AUTH_ACTIONS.LOAD_USER_SUCCESS,
@@ -104,6 +104,9 @@ export const AuthProvider = ({ children }) => {
             role: parsedUser.role
           }
         });
+      } else {
+        // If userData is invalid, treat as not logged in
+        dispatch({ type: AUTH_ACTIONS.LOAD_USER_FAILURE, payload: 'No user data' });
       }
     } catch (error) {
       console.error('Failed to load user:', error);
