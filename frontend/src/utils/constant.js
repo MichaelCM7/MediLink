@@ -8,6 +8,8 @@ export const ROUTES = {
     USER_SIGNUP: '/user/signup',
     DOCTOR_LOGIN: '/doctor/login',
     DOCTOR_SIGNUP: '/doctor/signup',
+    DOCTOR_DASHBOARD: '/doctor/dashboard',
+    DOCTOR_PROFILE: '/doctor/profile',
     ADMIN_LOGIN: '/admin/login',
     ADMIN_SIGNUP: '/admin/signup',
     DASHBOARD: '/dashboard',

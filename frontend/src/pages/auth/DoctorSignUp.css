@@ -1,0 +1,271 @@
+/* Container */
+.signup-root {
+  min-height: 100vh;
+  width: 100vw;
+  background: #f6f8fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Card Layout */
+.signup-card {
+  max-width: 1100px;
+  width: 100%;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(33, 150, 243, 0.08), 0 1.5px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+/* Left: Form */
+.signup-form-section {
+  flex: 1;
+  padding: 48px 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.signup-header .logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  text-decoration: none;
+}
+
+.signup-header .logo-icon {
+  background: #2196f3;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.signup-header .logo-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.signup-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.signup-header p {
+  color: #757575;
+  font-size: 1.08rem;
+}
+
+.signup-card-body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #222;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #2196f3;
+  background: #fff;
+}
+
+.form-input.error,
+.form-select.error {
+  border-color: #e53935;
+  background: #fff0f0;
+}
+
+.form-error {
+  color: #e53935;
+  font-size: 0.95rem;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input-with-icon,
+.input-with-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon svg,
+.input-with-toggle svg {
+  position: absolute;
+  left: 10px;
+  color: #bdbdbd;
+  width: 20px;
+  height: 20px;
+}
+
+.input-with-icon input {
+  padding-left: 36px;
+}
+
+.input-with-toggle input {
+  padding-right: 36px;
+}
+
+.input-with-toggle button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #bdbdbd;
+  cursor: pointer;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.bg-blue-50 {
+  background: #e3f0fa;
+}
+
+.max-w-xs {
+  max-width: 320px;
+}
+
+.object-contain {
+  object-fit: contain;
+}
+
+.btn-primary {
+  width: 100%;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #1769aa;
+}
+
+.signup-footer {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.signup-footer p {
+  color: #757575;
+  font-size: 1rem;
+}
+
+.signup-footer .login-link,
+.signup-footer .doctor-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.signup-footer .login-link:hover,
+.signup-footer .doctor-link:hover {
+  color: #1769aa;
+}
+
+.signup-footer .doctor-link {
+  margin-left: 4px;
+}
+
+/* Right: Illustration */
+.signup-illustration-section {
+  flex: 1;
+  background: #e3f0fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-illustration-section img {
+  width: 100%;
+  max-width: 340px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .signup-card {
+    flex-direction: column;
+    max-width: 98vw;
+  }
+  .signup-illustration-section {
+    min-height: 220px;
+    padding: 24px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .signup-form-section {
+    padding: 32px 12px 24px 12px;
+  }
+  .signup-illustration-section {
+    display: none;
+  }
+}

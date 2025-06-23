@@ -14,7 +14,12 @@ const HomePage = () => (
         <a href="#" className="hover:text-blue-600">Services</a>
         <a href="#" className="hover:text-blue-600">Join us</a>
         <a href="#" className="hover:text-blue-600">About Us</a>
-        <a href="#" className="hover:text-blue-600">Sign-Up</a>
+        <Link
+          to={ROUTES.USER_SIGNUP}
+          className="homepage-Sign-Up-btn"
+        >
+          Sign-Up
+        </Link>
         <Link
           to={ROUTES.USER_LOGIN}
           className="homepage-login-btn"
