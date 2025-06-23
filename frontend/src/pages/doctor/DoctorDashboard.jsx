@@ -14,7 +14,12 @@ const HomePage = () => (
         <a href="#" className="hover:text-blue-600">Home</a>
         <a href="#" className="hover:text-blue-600">Manage Appointments</a>
         <a href="#" className="hover:text-blue-600">Patient Records</a>
-        <a href="#" className="hover:text-blue-600">Monitor Ratings</a>
+        <Link
+          to={ROUTES.DOCTOR_RATINGS}
+          className="homepage-Doctor_Ratings-btn"
+        >
+          Monitor Ratings
+        </Link>
         <a href="#" className="hover:text-blue-600">About Us</a>
         <Link
           to={ROUTES.DOCTOR_PROFILE}

@@ -11,6 +11,8 @@ export const ROUTES = {
     DOCTOR_SIGNUP: '/doctor/signup',
     DOCTOR_DASHBOARD: '/doctor/dashboard',
     DOCTOR_PROFILE: '/doctor/profile',
+    DOCTOR_RATINGS: '/doctor/ratings',
+    DOCTOR_APPOINTMENTS: '/doctor/appointments',
     ADMIN_LOGIN: '/admin/login',
     ADMIN_SIGNUP: '/admin/signup',
     DASHBOARD: '/dashboard',
