@@ -1,6 +1,8 @@
+/* Remove these lines if Tailwind is not set up, or ensure your build process uses PostCSS with Tailwind CSS plugin */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
