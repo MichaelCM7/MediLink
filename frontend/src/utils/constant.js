@@ -13,6 +13,9 @@ export const ROUTES = {
     DASHBOARD: '/dashboard',
     PROFILE: '/profile',
     USER_DASHBOARD: '/user/dashboard',
+    BOOK_APPOINTMENT: '/user/book-appointment',
+    EMERGENCY: '/emergency',
+    ABOUT: '/about',
     // ...add other routes as needed
 };
 
