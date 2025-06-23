@@ -6,6 +6,7 @@ export const ROUTES = {
     SIGNUP: '/signup',
     USER_LOGIN: '/user/login',
     USER_SIGNUP: '/user/signup',
+    USER_PROFILE: '/user/profile',
     DOCTOR_LOGIN: '/doctor/login',
     DOCTOR_SIGNUP: '/doctor/signup',
     DOCTOR_DASHBOARD: '/doctor/dashboard',

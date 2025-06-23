@@ -6,6 +6,7 @@ import DoctorLogin from './pages/auth/DoctorLogin';
 import DoctorSignup from './pages/auth/DoctorSignup';
 import DoctorDashboard from './pages/doctor/DoctorDashboard';
 import DoctorProfile from './pages/doctor/DoctorProfile';
+import UserProfile from './pages/user/UserProfile.jsx';
 import UserDashboard from './pages/user/userDashboard';
 import EmergencyReport from './pages/user/EmergencyReport';
 import About from "./pages/common/About.jsx";
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/user/login" element={<UserLogin />} />
                 <Route path="/user/signup" element={<UserSignup />} />
+                <Route path="/user/profile" element={<UserProfile />} />
                 <Route path="/doctor/login" element={<DoctorLogin />} />
                 <Route path="/doctor/signup" element={<DoctorSignup />} />
                 <Route path="/doctor/dashboard" element={<DoctorDashboard />} />

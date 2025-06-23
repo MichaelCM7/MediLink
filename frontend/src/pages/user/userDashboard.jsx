@@ -101,16 +101,16 @@ const UserDashboard = () => {
     );
   }
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-semibold mb-4">You are not logged in.</h2>
-          <Link to={ROUTES.USER_LOGIN} className="btn btn-primary">Go to Login</Link>
-        </div>
-      </div>
-    );
-  }
+  // if (!user) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <div className="text-center">
+  //         <h2 className="text-xl font-semibold mb-4">You are not logged in.</h2>
+  //         <Link to={ROUTES.USER_LOGIN} className="btn btn-primary">Go to Login</Link>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50">

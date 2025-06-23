@@ -43,10 +43,10 @@ const HomePage = () => (
         </p>
         <div className="homepage-hero-actions">
           <Link to="#" className="primary">
-            REQUEST AMBULANCE
+            Manage Appointments
           </Link>
           <Link to="#" className="secondary">
-            Book Appointment
+            Patient Records
           </Link>
         </div>
         <p className="homepage-hero-caption">Saving Time. Saving Lives</p>
@@ -60,20 +60,16 @@ const HomePage = () => (
     {/* Features */}
     <section className="homepage-features">
       <div>
-        <img src="/Ambulance_home.png" alt="Ambulance" className="homepage-feature-icon" />
-        <h3 className="homepage-feature-title">24/7 Ambulance Dispatch</h3>
-      </div>
-      <div>
         <img src="/Calendar_home.png" alt="Book Doctors" className="homepage-feature-icon" />
-        <h3 className="homepage-feature-title">Book Doctors Instantly</h3>
-      </div>
-      <div>
-        <img src="/Location_home.png" alt="Smart Location" className="homepage-feature-icon" />
-        <h3 className="homepage-feature-title">Smart Location Detection</h3>
+        <h3 className="homepage-feature-title">Monitoring Appointments</h3>
       </div>
       <div>
         <img src="/clipboard-home.png" alt="Emergency Profile" className="homepage-feature-icon" />
-        <h3 className="homepage-feature-title">Emergency Profile</h3>
+        <h3 className="homepage-feature-title">Patient Records</h3>
+      </div>
+      <div>
+        <img src="/Location_home.png" alt="Smart Location" className="homepage-feature-icon" />
+        <h3 className="homepage-feature-title">Monitoring Ratings</h3>
       </div>
     </section>
   </div>
