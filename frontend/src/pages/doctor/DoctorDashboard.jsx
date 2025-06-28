@@ -10,18 +10,15 @@ const HomePage = () => (
         <img src="/MediLink.png" alt="MediLink Logo" className="homepage-logo-img" />
         <span className="homepage-logo-text">MEDILINK</span>
       </div>
+
       <nav className="homepage-nav">
         <Link to={ROUTES.DOCTOR_DASHBOARD} className="hover:text-blue-600">Home</Link>
         <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} className="hover:text-blue-600">Manage Appointments</Link>
         <Link to={ROUTES.DOCTOR_PATIENT_HISTORY} className="hover:text-blue-600">Patient Records</Link>
-        <Link
-          to={ROUTES.DOCTOR_RATINGS}
-          className="homepage-Doctor_Ratings-btn"
-        >
-          Monitor Ratings
-        </Link>
+        <Link to={ROUTES.DOCTOR_RATINGS} className="homepage-Doctor_Ratings-btn">Monitor Ratings</Link>
         <Link to={ROUTES.DOCTOR_ABOUT} className="hover:text-blue-600">About Us</Link>
       </nav>
+
       <div className="homepage-nav">
         <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
           <button
