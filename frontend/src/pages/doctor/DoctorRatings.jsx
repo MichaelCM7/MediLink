@@ -1,3 +1,7 @@
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../utils/constant.js";
+import React from "react";
+
 export default function RatingsPage() {
     const reviews = [
         {
@@ -42,29 +46,37 @@ export default function RatingsPage() {
                 </div>
 
                 <nav className="homepage-nav">
-                    <a href="#">Home</a>
-                    <a href="#">Manage appointments</a>
-                    <a href="#">Patient records</a>
-                    <a href="#" style={{ color: "#222", fontWeight: "600" }}>
-                        Monitor ratings
-                    </a>
-                    <a href="#">About</a>
+                    <Link to={ROUTES.DOCTOR_DASHBOARD}>Home</Link>
+                    <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} style={{ color: "#222", fontWeight: "600" }}>
+                        Manage appointments
+                    </Link>
+                    <Link to={ROUTES.DOCTOR_PATIENT_HISTORY}>Patient records</Link>
+                    <Link to={ROUTES.DOCTOR_RATINGS}>Monitor ratings</Link>
+                    <Link to={ROUTES.DOCTOR_ABOUT}>About Us</Link>
                 </nav>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                    <button
-                        style={{
-                            background: "transparent",
-                            color: "#222",
-                            border: "1px solid #ddd",
-                            padding: "10px 20px",
-                            fontSize: "0.9rem",
-                        }}
-                    >
-                        Profile
-                    </button>
-                    <button className="homepage-login-btn">Logout</button>
-                    <div style={{ width: "20px", height: "20px", color: "#666" }}>⚙</div>
+                <div className="homepage-nav">
+                    <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
+                        <button
+                            style={{
+                                background: "transparent",
+                                color: "#222",
+                                border: "1px solid #ddd",
+                                padding: "11.5px 20px",
+                                fontSize: "1rem",
+                            }}
+                        >
+                            Profile
+                        </button>
+                    </Link>
+                    <Link to={ROUTES.USER_LOGIN}>
+                        <button className="homepage-login-btn, margin-left:0;">Logout</button>
+                    </Link>
+                    <Link to={ROUTES.DOCTOR_SETTINGS}>
+                        <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
+                            <img src="/settings-icon.png" alt="settings butoon" />
+                        </div>
+                    </Link>
                 </div>
             </header>
 

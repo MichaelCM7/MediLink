@@ -5,6 +5,10 @@ import UserSignup from './pages/auth/UserSignup';
 import DoctorLogin from './pages/auth/DoctorLogin';
 import DoctorSignup from './pages/auth/DoctorSignup';
 import DoctorDashboard from './pages/doctor/DoctorDashboard';
+import PatientDetails from "./pages/doctor/PatientHistory.jsx";
+import PatientRecords from "./pages/doctor/PatientRecords.jsx";
+import ManageAppointments from "./pages/doctor/PatientRequests.jsx";
+import SettingsPage from "./pages/doctor/DoctorSettings.jsx";
 import DoctorProfile from './pages/doctor/DoctorProfile';
 import DoctorRatings from './pages/doctor/DoctorRatings.jsx';
 import UserProfile from './pages/user/UserProfile.jsx';
@@ -24,6 +28,11 @@ const App = () => {
                 <Route path="/user/profile" element={<UserProfile />} />
                 <Route path="/doctor/login" element={<DoctorLogin />} />
                 <Route path="/doctor/signup" element={<DoctorSignup />} />
+                <Route path="/doctor/About" element={<About />} />
+                <Route path="/doctor/patientHistory/patientDetails" element={<PatientDetails />}/>
+                <Route path="/doctor/patientHistory" element={<PatientRecords />}/>
+                <Route path="/doctor/manageAppointments" element={<ManageAppointments />} />
+                <Route path="/doctor/settings" element={<SettingsPage />} />
                 <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
                 <Route path="/doctor/profile" element={<DoctorProfile />} />
                 <Route path="/doctor/ratings" element={<DoctorRatings />} />

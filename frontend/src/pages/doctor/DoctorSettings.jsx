@@ -1,147 +1,381 @@
-import "./styles.css"
-import { Settings } from 'lucide-react';
+"use client"
 
-export default function SettingsPage() {
+import React, { useState } from "react"
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../utils/constant.js";
+
+export default function Settings() {
+  const [notifications, setNotifications] = useState({
+    newAppointments: true,
+    appointmentReminders: true,
+  })
+
+  const [passwords, setPasswords] = useState({
+    current: "",
+    new: "",
+    confirm: "",
+  })
+
+  const handleNotificationToggle = (type) => {
+    setNotifications((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }))
+  }
+
+  const handlePasswordChange = (field, value) => {
+    setPasswords((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
+  }
+
+  const handleUpdatePassword = () => {
+    if (passwords.new !== passwords.confirm) {
+      alert("New passwords do not match!")
+      return
+    }
+    alert("Password updated successfully!")
+    setPasswords({ current: "", new: "", confirm: "" })
+  }
+
+  const handleSaveSettings = () => {
+    alert("Settings saved successfully!")
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo and Navigation */}
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-sm"></div>
-                </div>
-                <span className="text-xl font-bold text-blue-600">MEDILINK</span>
+      <div className="homepage-root">
+        {/* Header */}
+        <header className="homepage-header">
+            <div className="homepage-logo">
+                <img src="/MediLink.png" alt="MediLink Logo" className="homepage-logo-img" />
+                <span className="homepage-logo-text">MEDILINK</span>
+            </div>
+
+          <nav className="homepage-nav">
+            <Link to={ROUTES.DOCTOR_DASHBOARD}>Home</Link>
+            <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} style={{ color: "#222", fontWeight: "600" }}>
+              Manage appointments
+            </Link>
+            <Link to={ROUTES.DOCTOR_PATIENT_HISTORY}>Patient records</Link>
+            <Link to={ROUTES.DOCTOR_RATINGS}>Monitor ratings</Link>
+            <Link to={ROUTES.DOCTOR_ABOUT}>About Us</Link>
+          </nav>
+
+          <div className="homepage-nav">
+            <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
+              <button
+                  style={{
+                    background: "transparent",
+                    color: "#222",
+                    border: "1px solid #ddd",
+                    padding: "11.5px 20px",
+                    fontSize: "1rem",
+                  }}
+              >
+                Profile
+              </button>
+            </Link>
+            <Link to={ROUTES.USER_LOGIN}>
+              <button className="homepage-login-btn, margin-left:0;">Logout</button>
+            </Link>
+            <Link to={ROUTES.DOCTOR_SETTINGS}>
+              <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
+                <img src="/settings-icon.png" alt="settings butoon" />
               </div>
-
-              <nav className="flex space-x-8">
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Home
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Services
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Ratings & Review
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  History
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  About
-                </a>
-              </nav>
-            </div>
-
-            {/* Right side buttons */}
-            <div className="flex items-center space-x-4">
-              <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">Profile</button>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium">
-                Logout
-              </button>
-              <button className="p-2 text-gray-600 hover:text-gray-800">
-                <Settings className="w-5 h-5" />
-              </button>
-            </div>
+            </Link>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Main Content */}
-      <main className="px-6 py-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Settings Header */}
-          <h1 className="text-2xl font-bold text-gray-900 mb-8">SETTINGS</h1>
+        {/* Main Content */}
+        <main
+            style={{
+              maxWidth: "1000px",
+              margin: "0 auto",
+              padding: "48px 32px",
+            }}
+        >
+          {/* Page Title */}
+          <h1
+              style={{
+                fontSize: "2.5rem",
+                fontWeight: "bold",
+                color: "#222",
+                marginBottom: "32px",
+              }}
+          >
+            SETTINGS
+          </h1>
 
-          {/* Settings Card */}
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
-            {/* Notification Preferences */}
-            <div className="mb-8">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6">Notification Preferences</h2>
+          {/* Settings Container */}
+          <div
+              style={{
+                border: "2px solid #333",
+                borderRadius: "16px",
+                padding: "40px",
+                backgroundColor: "white",
+              }}
+          >
+            {/* Notification Preferences Section */}
+            <div style={{ marginBottom: "48px" }}>
+              <h2
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    color: "#222",
+                    marginBottom: "24px",
+                  }}
+              >
+                Notification Preferences
+              </h2>
 
               {/* New Appointments */}
-              <div className="flex items-center justify-between mb-6">
+              <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "24px",
+                  }}
+              >
                 <div>
-                  <h3 className="font-medium text-gray-900 mb-1">New Appointments</h3>
-                  <p className="text-sm text-gray-600">Get notified when patients book appointments</p>
+                  <h3
+                      style={{
+                        fontSize: "1.1rem",
+                        fontWeight: "600",
+                        color: "#222",
+                        marginBottom: "4px",
+                      }}
+                  >
+                    New Appointments
+                  </h3>
+                  <p
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#666",
+                        margin: "0",
+                      }}
+                  >
+                    Get notified when patients book appointments
+                  </p>
                 </div>
-                <button
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 `}
+
+                {/* Toggle Switch */}
+                <div
+                    onClick={() => handleNotificationToggle("newAppointments")}
+                    style={{
+                      width: "50px",
+                      height: "26px",
+                      backgroundColor: notifications.newAppointments ? "#2196f3" : "#ccc",
+                      borderRadius: "13px",
+                      position: "relative",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s",
+                    }}
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+                  <div
+                      style={{
+                        width: "22px",
+                        height: "22px",
+                        backgroundColor: "white",
+                        borderRadius: "50%",
+                        position: "absolute",
+                        top: "2px",
+                        left: notifications.newAppointments ? "26px" : "2px",
+                        transition: "left 0.3s",
+                        boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                      }}
                   />
-                </button>
+                </div>
               </div>
 
               {/* Appointment Reminders */}
-              <div className="flex items-center justify-between">
+              <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+              >
                 <div>
-                  <h3 className="font-medium text-gray-900 mb-1">Appointment Reminders</h3>
-                  <p className="text-sm text-gray-600">Reminders for upcoming appointments</p>
+                  <h3
+                      style={{
+                        fontSize: "1.1rem",
+                        fontWeight: "600",
+                        color: "#222",
+                        marginBottom: "4px",
+                      }}
+                  >
+                    Appointment Reminders
+                  </h3>
+                  <p
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#666",
+                        margin: "0",
+                      }}
+                  >
+                    Reminders for upcoming appointments
+                  </p>
                 </div>
-                <button
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+
+                {/* Toggle Switch */}
+                <div
+                    onClick={() => handleNotificationToggle("appointmentReminders")}
+                    style={{
+                      width: "50px",
+                      height: "26px",
+                      backgroundColor: notifications.appointmentReminders ? "#2196f3" : "#ccc",
+                      borderRadius: "13px",
+                      position: "relative",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s",
+                    }}
                 >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+                  <div
+                      style={{
+                        width: "22px",
+                        height: "22px",
+                        backgroundColor: "white",
+                        borderRadius: "50%",
+                        position: "absolute",
+                        top: "2px",
+                        left: notifications.appointmentReminders ? "26px" : "2px",
+                        transition: "left 0.3s",
+                        boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                      }}
                   />
+                </div>
+              </div>
+            </div>
+
+            {/* Change Password Section */}
+            <div>
+              <h2
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    color: "#222",
+                    marginBottom: "24px",
+                  }}
+              >
+                Change Password
+              </h2>
+
+              {/* Password Fields */}
+              <div style={{ marginBottom: "32px" }}>
+                <input
+                    type="password"
+                    placeholder="Current Password"
+                    value={passwords.current}
+                    onChange={(e) => handlePasswordChange("current", e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      marginBottom: "16px",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
+                />
+
+                <input
+                    type="password"
+                    placeholder="New Password"
+                    value={passwords.new}
+                    onChange={(e) => handlePasswordChange("new", e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      marginBottom: "16px",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
+                />
+
+                <input
+                    type="password"
+                    placeholder="Confirm New Password"
+                    value={passwords.confirm}
+                    onChange={(e) => handlePasswordChange("confirm", e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
+                />
+              </div>
+
+              {/* Action Buttons */}
+              <div
+                  style={{
+                    display: "flex",
+                    gap: "16px",
+                  }}
+              >
+                <button
+                    onClick={handleUpdatePassword}
+                    style={{
+                      backgroundColor: "transparent",
+                      color: "#666",
+                      border: "1px solid #ddd",
+                      borderRadius: "6px",
+                      padding: "12px 24px",
+                      fontSize: "1rem",
+                      cursor: "pointer",
+                      fontWeight: "500",
+                      marginBottom: "18px",
+                    }}
+                >
+                  Update Password
+                </button>
+                <button
+                    onClick={handleSaveSettings}
+                    className="homepage-hero-actions primary"
+                    style={{
+                      padding: "12px 24px",
+                      fontSize: "1rem",
+                    }}
+                >
+                  Save Settings
                 </button>
               </div>
             </div>
-
-            {/* Change Password */}
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-6">Change Password</h2>
-
-              <div className="space-y-4">
-                {/* Current Password */}
-                <div>
-                  <input
-                    type="password"
-                    placeholder="Current Password"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
-                  />
-                </div>
-
-                {/* New Password */}
-                <div>
-                  <input
-                    type="password"
-                    placeholder="New Password"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
-                  />
-                </div>
-
-                {/* Confirm New Password */}
-                <div>
-                  <input
-                    type="password"
-                    placeholder="Confirm New Password"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
-                  />
-                </div>
-
-                {/* Buttons */}
-                <div className="flex space-x-4 pt-4">
-                  <button
-                    className={`px-6 py-2 rounded-md font-medium transition-colors }`}
-                  >
-                    Update Password
-                  </button>
-                  <button className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium transition-colors">
-                    Save Settings
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
   )
 }

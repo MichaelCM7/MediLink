@@ -1,124 +1,371 @@
-import { Settings, User } from "lucide-react"
-import "./styles.css"
+"use client"
 
-export default function App() {
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../utils/constant.js";
+import React from "react";
+
+export default function Profile() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo and Navigation */}
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-sm"></div>
-                </div>
-                <span className="text-xl font-bold text-blue-600">MEDILINK</span>
+      <div className="homepage-root">
+        {/* Header */}
+        <header className="homepage-header">
+            <div className="homepage-logo">
+                <img src="/MediLink.png" alt="MediLink Logo" className="homepage-logo-img" />
+                <span className="homepage-logo-text">MEDILINK</span>
+            </div>
+
+          <nav className="homepage-nav">
+            <Link to={ROUTES.DOCTOR_DASHBOARD}>Home</Link>
+            <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} style={{ color: "#222", fontWeight: "600" }}>
+              Manage appointments
+            </Link>
+            <Link to={ROUTES.DOCTOR_PATIENT_HISTORY}>Patient records</Link>
+            <Link to={ROUTES.DOCTOR_RATINGS}>Monitor ratings</Link>
+            <Link to={ROUTES.DOCTOR_ABOUT}>About Us</Link>
+          </nav>
+
+          <div className="homepage-nav">
+            <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
+              <button
+                  style={{
+                    background: "transparent",
+                    color: "#222",
+                    border: "1px solid #ddd",
+                    padding: "11.5px 20px",
+                    fontSize: "1rem",
+                  }}
+              >
+                Profile
+              </button>
+            </Link>
+            <Link to={ROUTES.USER_LOGIN}>
+              <button className="homepage-login-btn, margin-left:0;">Logout</button>
+            </Link>
+            <Link to={ROUTES.DOCTOR_SETTINGS}>
+              <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
+                <img src="/settings-icon.png" alt="settings butoon" />
               </div>
-
-              <nav className="flex space-x-8">
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Home
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Patient Records
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Appointments
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">
-                  Ratings
-                </a>
-              </nav>
-            </div>
-
-            {/* Right side buttons */}
-            <div className="flex items-center space-x-4">
-              <button className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">Profile</button>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium">
-                Logout
-              </button>
-              <button className="p-2 text-gray-600 hover:text-gray-800">
-                <Settings className="w-5 h-5" />
-              </button>
-            </div>
+            </Link>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Main Content */}
-      <main className="px-6 py-8">
-        <div className="max-w-4xl mx-auto">
+        {/* Main Content */}
+        <main
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              padding: "48px 32px",
+            }}
+        >
           {/* Profile Header */}
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-            <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium">
+          <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "32px",
+              }}
+          >
+            <h1
+                style={{
+                  fontSize: "2rem",
+                  fontWeight: "bold",
+                  color: "#222",
+                  margin: "0",
+                }}
+            >
+              Profile
+            </h1>
+            <button
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#222",
+                  border: "1px solid #ddd",
+                  borderRadius: "6px",
+                  padding: "8px 16px",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  fontWeight: "500",
+                }}
+            >
               Edit profile
             </button>
           </div>
 
           {/* Profile Card */}
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
+          <div
+              style={{
+                backgroundColor: "white",
+                border: "2px solid #333",
+                borderRadius: "12px",
+                padding: "40px",
+              }}
+          >
             {/* Hospital Info */}
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center">
-                <User className="w-8 h-8 text-blue-600" />
+            <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "16px",
+                  marginBottom: "32px",
+                }}
+            >
+              <div
+                  style={{
+                    width: "64px",
+                    height: "64px",
+                    backgroundColor: "#e3f2fd",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+              >
+                <div
+                    style={{
+                      fontSize: "32px",
+                      color: "#2196f3",
+                    }}
+                >
+                  👤
+                </div>
               </div>
-              <h2 className="text-xl font-semibold text-gray-900">ABC Hospital</h2>
+              <h2
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    color: "#222",
+                    margin: "0",
+                  }}
+              >
+                ABC Hospital
+              </h2>
             </div>
 
             {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                  gap: "24px",
+                  marginBottom: "24px",
+                }}
+            >
               {/* Full name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Full name</label>
+                <label
+                    style={{
+                      display: "block",
+                      fontSize: "0.9rem",
+                      fontWeight: "600",
+                      color: "#374151",
+                      marginBottom: "8px",
+                    }}
+                >
+                  Full name
+                </label>
                 <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    type="text"
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
                 />
               </div>
 
               {/* Staff Id */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Staff Id</label>
+                <label
+                    style={{
+                      display: "block",
+                      fontSize: "0.9rem",
+                      fontWeight: "600",
+                      color: "#374151",
+                      marginBottom: "8px",
+                    }}
+                >
+                  Staff Id
+                </label>
                 <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    type="text"
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
                 />
               </div>
 
               {/* Specialization */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Specialization</label>
+                <label
+                    style={{
+                      display: "block",
+                      fontSize: "0.9rem",
+                      fontWeight: "600",
+                      color: "#374151",
+                      marginBottom: "8px",
+                    }}
+                >
+                  Specialization
+                </label>
                 <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    type="text"
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
                 />
               </div>
 
               {/* Date Joined */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Date Joined</label>
+                <label
+                    style={{
+                      display: "block",
+                      fontSize: "0.9rem",
+                      fontWeight: "600",
+                      color: "#374151",
+                      marginBottom: "8px",
+                    }}
+                >
+                  Date Joined
+                </label>
                 <input
-                  type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    type="date"
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #d1d5db",
+                      borderRadius: "6px",
+                      fontSize: "1rem",
+                      outline: "none",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "#2196f3"
+                      e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "#d1d5db"
+                      e.target.style.boxShadow = "none"
+                    }}
                 />
               </div>
             </div>
 
             {/* Biography */}
-            <div className="mt-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Biography</label>
+            <div>
+              <label
+                  style={{
+                    display: "block",
+                    fontSize: "0.9rem",
+                    fontWeight: "600",
+                    color: "#374151",
+                    marginBottom: "8px",
+                  }}
+              >
+                Biography
+              </label>
               <textarea
-                rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Enter your biography..."
+                  rows={4}
+                  placeholder="Enter your biography..."
+                  style={{
+                    width: "100%",
+                    padding: "12px",
+                    border: "1px solid #d1d5db",
+                    borderRadius: "6px",
+                    fontSize: "1rem",
+                    outline: "none",
+                    resize: "none",
+                    fontFamily: "inherit",
+                    transition: "border-color 0.2s, box-shadow 0.2s",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "#2196f3"
+                    e.target.style.boxShadow = "0 0 0 3px rgba(33, 150, 243, 0.1)"
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "#d1d5db"
+                    e.target.style.boxShadow = "none"
+                  }}
               />
             </div>
+
+            {/* Save Button */}
+            <div
+                style={{
+                  marginTop: "32px",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: "12px",
+                }}
+            >
+              <button
+                  style={{
+                    backgroundColor: "white",
+                    color: "#666",
+                    border: "1px solid #ddd",
+                    borderRadius: "6px",
+                    padding: "12px 24px",
+                    fontSize: "1rem",
+                    cursor: "pointer",
+                    fontWeight: "500",
+                    marginBottom: "18px",
+                  }}
+              >
+                Cancel
+              </button>
+              <button
+                  className="homepage-hero-actions primary"
+                  style={{
+                    padding: "12px 24px",
+                    fontSize: "1rem",
+                  }}
+              >
+                Save Changes
+              </button>
+            </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
   )
 }

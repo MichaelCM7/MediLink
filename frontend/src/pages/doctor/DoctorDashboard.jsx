@@ -11,29 +11,40 @@ const HomePage = () => (
         <span className="homepage-logo-text">MEDILINK</span>
       </div>
       <nav className="homepage-nav">
-        <a href="#" className="hover:text-blue-600">Home</a>
-        <a href="#" className="hover:text-blue-600">Manage Appointments</a>
-        <a href="#" className="hover:text-blue-600">Patient Records</a>
+        <Link to={ROUTES.DOCTOR_DASHBOARD} className="hover:text-blue-600">Home</Link>
+        <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} className="hover:text-blue-600">Manage Appointments</Link>
+        <Link to={ROUTES.DOCTOR_PATIENT_HISTORY} className="hover:text-blue-600">Patient Records</Link>
         <Link
           to={ROUTES.DOCTOR_RATINGS}
           className="homepage-Doctor_Ratings-btn"
         >
           Monitor Ratings
         </Link>
-        <a href="#" className="hover:text-blue-600">About Us</a>
-        <Link
-          to={ROUTES.DOCTOR_PROFILE}
-          className="homepage-Sign-Up-btn"
-        >
-          Profile
-        </Link>
-        <Link
-          to={ROUTES.USER_LOGIN}
-          className="homepage-login-btn"
-        >
-          Logout
-        </Link>
+        <Link to={ROUTES.DOCTOR_ABOUT} className="hover:text-blue-600">About Us</Link>
       </nav>
+      <div className="homepage-nav">
+        <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
+          <button
+              style={{
+                background: "transparent",
+                color: "#222",
+                border: "1px solid #ddd",
+                padding: "11.5px 20px",
+                fontSize: "1rem",
+              }}
+          >
+            Profile
+          </button>
+        </Link>
+        <Link to={ROUTES.USER_LOGIN}>
+          <button className="homepage-login-btn, margin-left:0;">Logout</button>
+        </Link>
+        <Link to={ROUTES.DOCTOR_SETTINGS}>
+          <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
+            <img src="/settings-icon.png" alt="settings butoon" />
+          </div>
+        </Link>
+      </div>
     </header>
 
     {/* Hero Section */}
@@ -47,10 +58,10 @@ const HomePage = () => (
           Connect with trusted doctors and hospitals in Nairobi. Book appointments, access emergency services, and manage your healthcare journey with ease.
         </p>
         <div className="homepage-hero-actions">
-          <Link to="#" className="primary">
+          <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} className="primary">
             Manage Appointments
           </Link>
-          <Link to="#" className="secondary">
+          <Link to={ROUTES.DOCTOR_PATIENT_HISTORY} className="secondary">
             Patient Records
           </Link>
         </div>
