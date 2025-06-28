@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from 'react';
 
 const SearchHospitals = () => {
@@ -269,14 +270,14 @@ const SearchHospitals = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
+        {/!* Header *!/}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Find Hospitals</h1>
           <p className="text-gray-600">Locate healthcare facilities near you</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
+          {/!* Filters Sidebar *!/}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow p-6 sticky top-4">
               <div className="flex justify-between items-center mb-4">
@@ -289,7 +290,7 @@ const SearchHospitals = () => {
                 </button>
               </div>
 
-              {/* Search */}
+              {/!* Search *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Search
@@ -303,7 +304,7 @@ const SearchHospitals = () => {
                 />
               </div>
 
-              {/* Hospital Type Filter */}
+              {/!* Hospital Type Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Hospital Type
@@ -320,7 +321,7 @@ const SearchHospitals = () => {
                 </select>
               </div>
 
-              {/* Services Filter */}
+              {/!* Services Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Services
@@ -337,7 +338,7 @@ const SearchHospitals = () => {
                 </select>
               </div>
 
-              {/* Emergency Room Filter */}
+              {/!* Emergency Room Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Emergency Room
@@ -353,7 +354,7 @@ const SearchHospitals = () => {
                 </select>
               </div>
 
-              {/* Insurance Filter */}
+              {/!* Insurance Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Insurance
@@ -370,7 +371,7 @@ const SearchHospitals = () => {
                 </select>
               </div>
 
-              {/* Rating Filter */}
+              {/!* Rating Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Minimum Rating
@@ -389,9 +390,9 @@ const SearchHospitals = () => {
             </div>
           </div>
 
-          {/* Results */}
+          {/!* Results *!/}
           <div className="lg:col-span-3">
-            {/* Sort and Results Count */}
+            {/!* Sort and Results Count *!/}
             <div className="flex justify-between items-center mb-6">
               <p className="text-gray-600">
                 {filteredHospitals.length} hospitals found
@@ -408,7 +409,7 @@ const SearchHospitals = () => {
               </select>
             </div>
 
-            {/* Hospital Cards */}
+            {/!* Hospital Cards *!/}
             {filteredHospitals.length === 0 ? (
               <div className="text-center py-12">
                 <div className="text-4xl mb-4">🏥</div>
@@ -442,7 +443,7 @@ const SearchHospitals = () => {
 
                         <p className="text-gray-600 mb-4">{hospital.description}</p>
 
-                        {/* Services */}
+                        {/!* Services *!/}
                         <div className="mb-4">
                           <h4 className="text-sm font-medium text-gray-700 mb-2">Services:</h4>
                           <div className="flex flex-wrap gap-2">
@@ -457,7 +458,7 @@ const SearchHospitals = () => {
                           </div>
                         </div>
 
-                        {/* Hospital Details */}
+                        {/!* Hospital Details *!/}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600 mb-4">
                           <div>
                             <span className="font-medium">Hours:</span>
@@ -477,7 +478,7 @@ const SearchHospitals = () => {
                           </div>
                         </div>
 
-                        {/* Contact & Transportation */}
+                        {/!* Contact & Transportation *!/}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 mb-4">
                           <div>
                             <span className="font-medium">Phone:</span>
@@ -493,14 +494,14 @@ const SearchHospitals = () => {
                           </div>
                         </div>
 
-                        {/* Insurance */}
+                        {/!* Insurance *!/}
                         <div className="mb-4">
                           <span className="text-sm font-medium text-gray-700">Accepts: </span>
                           <span className="text-sm text-gray-600">{hospital.insurance.join(', ')}</span>
                         </div>
                       </div>
 
-                      {/* Action Buttons */}
+                      {/!* Action Buttons *!/}
                       <div className="mt-4 lg:mt-0 lg:ml-6 flex flex-col space-y-2 lg:w-48">
                         <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
                           Get Directions
@@ -532,4 +533,4 @@ const SearchHospitals = () => {
   );
 };
 
-export default SearchHospitals;
+export default SearchHospitals;*/

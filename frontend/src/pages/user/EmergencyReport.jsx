@@ -1,298 +1,817 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+"use client"
 
-const EmergencyReport = () => {
-  const { user, sendEmergencyAlert } = useAuth();
-  const [location, setLocation] = useState(null);
-  const [emergencyType, setEmergencyType] = useState('');
-  const [description, setDescription] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [alertSent, setAlertSent] = useState(false);
-  const [trackingId, setTrackingId] = useState('');
+import React, { useState, useEffect } from "react"
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../utils/constant.js";
+
+export default function EmergencyReport() {
+  // Mock user data - in real app this would come from useAuth
+  const user = {
+    id: "1",
+    firstName: "Jane",
+    lastName: "Doe",
+    phone: "0712345678",
+    bloodType: "A+",
+    allergies: "Penicillin",
+    medications: "Lisinopril 10mg daily",
+  }
+
+  const [location, setLocation] = useState(null)
+  const [emergencyType, setEmergencyType] = useState("")
+  const [description, setDescription] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [alertSent, setAlertSent] = useState(false)
+  const [trackingId, setTrackingId] = useState("")
 
   const emergencyTypes = [
-    { id: 'medical', name: '🚑 Medical Emergency', color: 'red' },
-    { id: 'accident', name: '🚗 Accident', color: 'orange' },
-    { id: 'cardiac', name: '💓 Cardiac Event', color: 'red' },
-    { id: 'breathing', name: '🫁 Breathing Difficulty', color: 'blue' },
-    { id: 'injury', name: '🩹 Serious Injury', color: 'yellow' },
-    { id: 'poisoning', name: '☠️ Poisoning', color: 'purple' },
-    { id: 'mental', name: '🧠 Mental Health Crisis', color: 'green' },
-    { id: 'other', name: '⚠️ Other Emergency', color: 'gray' }
-  ];
+    { id: "medical", name: "🚑 Medical Emergency", color: "red" },
+    { id: "accident", name: "🚗 Accident", color: "orange" },
+    { id: "cardiac", name: "💓 Cardiac Event", color: "red" },
+    { id: "breathing", name: "🫁 Breathing Difficulty", color: "blue" },
+    { id: "injury", name: "🩹 Serious Injury", color: "yellow" },
+    { id: "poisoning", name: "☠️ Poisoning", color: "purple" },
+    { id: "mental", name: "🧠 Mental Health Crisis", color: "green" },
+    { id: "other", name: "⚠️ Other Emergency", color: "gray" },
+  ]
 
   useEffect(() => {
-    getCurrentLocation();
-  }, []);
+    getCurrentLocation()
+  }, [])
 
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            accuracy: position.coords.accuracy
-          });
-        },
-        (error) => {
-          console.error('Error getting location:', error);
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
-      );
+          (position) => {
+            setLocation({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy,
+            })
+          },
+          (error) => {
+            console.error("Error getting location:", error)
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 },
+      )
     }
-  };
+  }
+
+  const sendEmergencyAlert = async (alertData) => {
+    // Mock API call
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          success: true,
+          alertId: "EMG-" + Math.random().toString(36).substr(2, 9),
+        })
+      }, 2000)
+    })
+  }
 
   const handleQuickEmergency = async () => {
-    setIsSubmitting(true);
+    setIsSubmitting(true)
     try {
       const alertData = {
-        type: 'immediate',
+        type: "immediate",
         location: location,
         timestamp: new Date().toISOString(),
         userId: user?.id,
-        userInfo: user ? {
-          name: `${user.firstName} ${user.lastName}`,
-          phone: user.phone,
-          bloodType: user.bloodType,
-          allergies: user.allergies,
-          medications: user.medications
-        } : null
-      };
+        userInfo: user
+            ? {
+              name: `${user.firstName} ${user.lastName}`,
+              phone: user.phone,
+              bloodType: user.bloodType,
+              allergies: user.allergies,
+              medications: user.medications,
+            }
+            : null,
+      }
 
-      const result = await sendEmergencyAlert(alertData);
+      const result = await sendEmergencyAlert(alertData)
       if (result.success) {
-        setAlertSent(true);
-        setTrackingId(result.alertId || 'EMG-' + Math.random().toString(36).substr(2, 9));
+        setAlertSent(true)
+        setTrackingId(result.alertId || "EMG-" + Math.random().toString(36).substr(2, 9))
       }
     } catch (error) {
-      console.error('Emergency alert failed:', error);
+      console.error("Emergency alert failed:", error)
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleDetailedSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e.preventDefault()
+    setIsSubmitting(true)
 
     try {
       const alertData = {
-        type: 'detailed',
+        type: "detailed",
         emergencyType,
         description,
         location,
         timestamp: new Date().toISOString(),
         userId: user?.id,
-        userInfo: user ? {
-          name: `${user.firstName} ${user.lastName}`,
-          phone: user.phone,
-          bloodType: user.bloodType,
-          allergies: user.allergies
-        } : null
-      };
+        userInfo: user
+            ? {
+              name: `${user.firstName} ${user.lastName}`,
+              phone: user.phone,
+              bloodType: user.bloodType,
+              allergies: user.allergies,
+            }
+            : null,
+      }
 
-      const result = await sendEmergencyAlert(alertData);
+      const result = await sendEmergencyAlert(alertData)
       if (result.success) {
-        setAlertSent(true);
-        setTrackingId(result.alertId || 'EMG-' + Math.random().toString(36).substr(2, 9));
+        setAlertSent(true)
+        setTrackingId(result.alertId || "EMG-" + Math.random().toString(36).substr(2, 9))
       }
     } catch (error) {
-      console.error('Emergency alert failed:', error);
+      console.error("Emergency alert failed:", error)
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   if (alertSent) {
     return (
-      <div className="min-h-screen bg-red-50 flex items-center justify-center">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8 text-center">
-          <div className="text-6xl mb-4">✅</div>
-          <h1 className="text-2xl font-bold text-green-600 mb-4">Emergency Alert Sent!</h1>
-          <p className="text-gray-600 mb-6">
-            Your emergency alert has been successfully sent to nearby hospitals and emergency services.
-          </p>
-          
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-            <p className="text-sm font-medium text-gray-700">Tracking ID:</p>
-            <p className="text-lg font-mono text-blue-600">{trackingId}</p>
-          </div>
+        <div className="homepage-root">
+          {/* Header */}
+          <header className="homepage-header">
+            <div className="homepage-logo">
+                <img src="/MediLink.png" alt="MediLink Logo" className="homepage-logo-img" />
+                <span className="homepage-logo-text">MEDILINK</span>
+            </div>
 
-          <div className="space-y-3 text-sm text-gray-600 mb-6">
-            <p>• Emergency services have been notified</p>
-            <p>• Your location has been shared</p>
-            <p>• Medical information has been provided</p>
-            <p>• Help is on the way</p>
-          </div>
+            <nav className="homepage-nav">
+                <Link to={ROUTES.USER_DASHBOARD} style={{ color: "#222", fontWeight: "600" }}>
+                    Home
+                </Link>
+                <Link to={ROUTES.USER_SERVICES}>Services</Link>
+                <Link to={ROUTES.USER_REVIEWS}>Ratings & Review</Link>
+                <Link to={ROUTES.USER_APPOINTMENT_HISTORY}>History</Link>
+                <Link to={ROUTES.USER_ABOUT}>About</Link>
+                <Link to={ROUTES.USER_EMERGENCY} style={{ color: "#f44336" }}>
+                    Report Emergency
+                </Link>
+            </nav>
 
-          <button
-            onClick={() => {
-              setAlertSent(false);
-              setEmergencyType('');
-              setDescription('');
-            }}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <Link to={ROUTES.USER_PROFILE} className="homepage-Sign-Up-btn">
+                    <button
+                        style={{
+                            background: "transparent",
+                            color: "#222",
+                            border: "1px solid #ddd",
+                            padding: "11.5px 20px",
+                            fontSize: "1rem",
+                        }}
+                    >
+                        Profile
+                    </button>
+                </Link>
+                <Link to={ROUTES.USER_LOGIN}>
+                    <button className="homepage-login-btn, margin-left:0;">Logout</button>
+                </Link>
+                <Link to={ROUTES.USER_SETTINGS}>
+                    <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
+                        <img src="/settings-icon.png" alt="settings butoon" />
+                    </div>
+                </Link>
+            </div>
+          </header>
+
+          {/* Success Content */}
+          <main
+              style={{
+                minHeight: "calc(100vh - 80px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#fef2f2",
+                padding: "32px",
+              }}
           >
-            Send Another Alert
-          </button>
+            <div
+                style={{
+                  maxWidth: "500px",
+                  width: "100%",
+                  backgroundColor: "white",
+                  borderRadius: "12px",
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                  padding: "48px 32px",
+                  textAlign: "center",
+                  border: "2px solid #333",
+                }}
+            >
+              <div style={{ fontSize: "4rem", marginBottom: "24px" }}>✅</div>
+              <h1
+                  style={{
+                    fontSize: "2rem",
+                    fontWeight: "bold",
+                    color: "#16a34a",
+                    marginBottom: "16px",
+                  }}
+              >
+                Emergency Alert Sent!
+              </h1>
+              <p
+                  style={{
+                    color: "#666",
+                    fontSize: "1.1rem",
+                    marginBottom: "32px",
+                    lineHeight: "1.6",
+                  }}
+              >
+                Your emergency alert has been successfully sent to nearby hospitals and emergency services.
+              </p>
+
+              <div
+                  style={{
+                    backgroundColor: "#f8f9fa",
+                    borderRadius: "8px",
+                    padding: "20px",
+                    marginBottom: "32px",
+                    border: "1px solid #e5e7eb",
+                  }}
+              >
+                <p
+                    style={{
+                      fontSize: "0.9rem",
+                      fontWeight: "600",
+                      color: "#374151",
+                      marginBottom: "8px",
+                    }}
+                >
+                  Tracking ID:
+                </p>
+                <p
+                    style={{
+                      fontSize: "1.2rem",
+                      fontFamily: "monospace",
+                      color: "#2196f3",
+                      fontWeight: "bold",
+                      margin: "0",
+                    }}
+                >
+                  {trackingId}
+                </p>
+              </div>
+
+              <div
+                  style={{
+                    marginBottom: "32px",
+                    textAlign: "left",
+                  }}
+              >
+                {[
+                  "• Emergency services have been notified",
+                  "• Your location has been shared",
+                  "• Medical information has been provided",
+                  "• Help is on the way",
+                ].map((item, index) => (
+                    <p
+                        key={index}
+                        style={{
+                          fontSize: "0.95rem",
+                          color: "#666",
+                          margin: "8px 0",
+                        }}
+                    >
+                      {item}
+                    </p>
+                ))}
+              </div>
+
+              <button
+                  onClick={() => {
+                    setAlertSent(false)
+                    setEmergencyType("")
+                    setDescription("")
+                  }}
+                  className="homepage-hero-actions primary"
+                  style={{
+                    width: "100%",
+                    padding: "16px 24px",
+                    fontSize: "1rem",
+                  }}
+              >
+                Send Another Alert
+              </button>
+            </div>
+          </main>
         </div>
-      </div>
-    );
+    )
   }
 
   return (
-    <div className="min-h-screen bg-red-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="homepage-root">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">🚨</div>
-          <h1 className="text-3xl font-bold text-red-600 mb-2">Emergency Alert</h1>
-          <p className="text-gray-700">Get immediate help from nearby medical facilities</p>
-        </div>
+          <header className="homepage-header">
+              <div className="homepage-logo">
+                  <img src="/MediLink.png" alt="MediLink Logo" className="homepage-logo-img" />
+                  <span className="homepage-logo-text">MEDILINK</span>
+              </div>
 
-        {/* Quick Emergency Button */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8 border-l-4 border-red-500">
-          <h2 className="text-xl font-bold text-red-600 mb-4">🚨 IMMEDIATE EMERGENCY</h2>
-          <p className="text-gray-700 mb-6">
-            If this is a life-threatening emergency, click the button below to immediately alert nearby hospitals with your location.
-          </p>
-          <button
-            onClick={handleQuickEmergency}
-            disabled={isSubmitting}
-            className="w-full bg-red-600 text-white py-4 px-6 rounded-lg hover:bg-red-700 transition-colors font-bold text-lg disabled:opacity-50"
+              <nav className="homepage-nav">
+                  <Link to={ROUTES.USER_DASHBOARD} style={{ color: "#222", fontWeight: "600" }}>
+                      Home
+                  </Link>
+                  <Link to={ROUTES.USER_SERVICES}>Services</Link>
+                  <Link to={ROUTES.USER_REVIEWS}>Ratings & Review</Link>
+                  <Link to={ROUTES.USER_APPOINTMENT_HISTORY}>History</Link>
+                  <Link to={ROUTES.USER_ABOUT}>About</Link>
+                  <Link to={ROUTES.USER_EMERGENCY} style={{ color: "#f44336" }}>
+                      Report Emergency
+                  </Link>
+              </nav>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <Link to={ROUTES.USER_PROFILE} className="homepage-Sign-Up-btn">
+                      <button
+                          style={{
+                              background: "transparent",
+                              color: "#222",
+                              border: "1px solid #ddd",
+                              padding: "11.5px 20px",
+                              fontSize: "1rem",
+                          }}
+                      >
+                          Profile
+                      </button>
+                  </Link>
+                  <Link to={ROUTES.USER_LOGIN}>
+                      <button className="homepage-login-btn, margin-left:0;">Logout</button>
+                  </Link>
+                  <Link to={ROUTES.USER_SETTINGS}>
+                      <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
+                          <img src="/settings-icon.png" alt="settings butoon" />
+                      </div>
+                  </Link>
+              </div>
+          </header>
+
+        {/* Main Content */}
+        <main
+            style={{
+              backgroundColor: "#fef2f2",
+              minHeight: "calc(100vh - 80px)",
+              padding: "48px 32px",
+            }}
+        >
+          <div
+              style={{
+                maxWidth: "1000px",
+                margin: "0 auto",
+              }}
           >
-            {isSubmitting ? 'Sending Alert...' : 'SEND EMERGENCY ALERT NOW'}
-          </button>
-          <p className="text-sm text-gray-500 mt-2 text-center">
-            This will share your location and medical information with emergency services
-          </p>
-        </div>
-
-        {/* Detailed Emergency Form */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-xl font-bold text-gray-800 mb-6">Detailed Emergency Report</h2>
-          
-          <form onSubmit={handleDetailedSubmit} className="space-y-6">
-            {/* Emergency Type Selection */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Type of Emergency *
-              </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {emergencyTypes.map((type) => (
-                  <button
-                    key={type.id}
-                    type="button"
-                    onClick={() => setEmergencyType(type.id)}
-                    className={`p-3 rounded-lg border-2 text-sm font-medium transition-colors ${
-                      emergencyType === type.id
-                        ? 'border-red-500 bg-red-50 text-red-700'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    {type.name}
-                  </button>
-                ))}
-              </div>
+            {/* Header */}
+            <div style={{ textAlign: "center", marginBottom: "48px" }}>
+              <div style={{ fontSize: "4rem", marginBottom: "16px" }}>🚨</div>
+              <h1
+                  style={{
+                    fontSize: "2.5rem",
+                    fontWeight: "bold",
+                    color: "#dc2626",
+                    marginBottom: "8px",
+                  }}
+              >
+                Emergency Alert
+              </h1>
+              <p
+                  style={{
+                    color: "#374151",
+                    fontSize: "1.1rem",
+                  }}
+              >
+                Get immediate help from nearby medical facilities
+              </p>
             </div>
 
-            {/* Description */}
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                Description of Emergency *
-              </label>
-              <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                placeholder="Please describe what happened, symptoms, or situation..."
-                required
-              />
-            </div>
-
-            {/* Location Status */}
-            <div className="bg-blue-50 rounded-lg p-4">
-              <h3 className="text-sm font-medium text-blue-800 mb-2">📍 Location Status</h3>
-              {location ? (
-                <div className="text-sm text-blue-700">
-                  <p>✅ Location detected (Accuracy: ~{Math.round(location.accuracy)}m)</p>
-                  <p className="text-xs text-blue-600 mt-1">
-                    Lat: {location.latitude.toFixed(6)}, Lng: {location.longitude.toFixed(6)}
-                  </p>
-                </div>
-              ) : (
-                <div className="text-sm text-orange-700">
-                  <p>⚠️ Location not available</p>
-                  <button
-                    type="button"
-                    onClick={getCurrentLocation}
-                    className="text-blue-600 hover:text-blue-700 underline"
-                  >
-                    Try to get location again
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* User Information Display */}
-            {user && (
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="text-sm font-medium text-gray-800 mb-3">Your Information (will be shared)</h3>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="font-medium">Name:</span> {user.firstName} {user.lastName}
-                  </div>
-                  <div>
-                    <span className="font-medium">Phone:</span> {user.phone || 'Not provided'}
-                  </div>
-                  <div>
-                    <span className="font-medium">Blood Type:</span> {user.bloodType || 'Unknown'}
-                  </div>
-                  <div>
-                    <span className="font-medium">Allergies:</span> {user.allergies || 'None listed'}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={!emergencyType || !description || isSubmitting}
-              className="w-full bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            {/* Quick Emergency Button */}
+            <div
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  padding: "40px",
+                  marginBottom: "32px",
+                  borderLeft: "6px solid #dc2626",
+                  border: "2px solid #333",
+                }}
             >
-              {isSubmitting ? 'Sending Alert...' : 'Send Detailed Emergency Alert'}
-            </button>
-          </form>
+              <h2
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    color: "#dc2626",
+                    marginBottom: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                  }}
+              >
+                🚨 IMMEDIATE EMERGENCY
+              </h2>
+              <p
+                  style={{
+                    color: "#374151",
+                    marginBottom: "32px",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.6",
+                  }}
+              >
+                If this is a life-threatening emergency, click the button below to immediately alert nearby hospitals with
+                your location.
+              </p>
+              <button
+                  onClick={handleQuickEmergency}
+                  disabled={isSubmitting}
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#dc2626",
+                    color: "white",
+                    padding: "20px 24px",
+                    borderRadius: "8px",
+                    border: "none",
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    cursor: isSubmitting ? "not-allowed" : "pointer",
+                    opacity: isSubmitting ? "0.5" : "1",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isSubmitting) {
+                      e.target.style.backgroundColor = "#b91c1c"
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isSubmitting) {
+                      e.target.style.backgroundColor = "#dc2626"
+                    }
+                  }}
+              >
+                {isSubmitting ? "Sending Alert..." : "SEND EMERGENCY ALERT NOW"}
+              </button>
+              <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#6b7280",
+                    marginTop: "12px",
+                    textAlign: "center",
+                  }}
+              >
+                This will share your location and medical information with emergency services
+              </p>
+            </div>
 
-          {/* Emergency Contacts */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <h3 className="text-lg font-medium text-gray-800 mb-4">Emergency Contacts</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-red-50 rounded-lg">
-                <div className="text-2xl mb-2">🚑</div>
-                <p className="font-medium">Emergency Services</p>
-                <p className="text-lg font-bold text-red-600">911</p>
-              </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-2xl mb-2">☠️</div>
-                <p className="font-medium">Poison Control</p>
-                <p className="text-lg font-bold text-blue-600">1-800-222-1222</p>
-              </div>
-              <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-2xl mb-2">🧠</div>
-                <p className="font-medium">Crisis Hotline</p>
-                <p className="text-lg font-bold text-green-600">988</p>
+            {/* Detailed Emergency Form */}
+            <div
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  padding: "40px",
+                  border: "2px solid #333",
+                }}
+            >
+              <h2
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    color: "#222",
+                    marginBottom: "32px",
+                  }}
+              >
+                Detailed Emergency Report
+              </h2>
+
+              <form onSubmit={handleDetailedSubmit}>
+                {/* Emergency Type Selection */}
+                <div style={{ marginBottom: "32px" }}>
+                  <label
+                      style={{
+                        display: "block",
+                        fontSize: "0.9rem",
+                        fontWeight: "600",
+                        color: "#374151",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    Type of Emergency *
+                  </label>
+                  <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                        gap: "12px",
+                      }}
+                  >
+                    {emergencyTypes.map((type) => (
+                        <button
+                            key={type.id}
+                            type="button"
+                            onClick={() => setEmergencyType(type.id)}
+                            style={{
+                              padding: "16px 12px",
+                              borderRadius: "8px",
+                              border: emergencyType === type.id ? "2px solid #dc2626" : "2px solid #e5e7eb",
+                              backgroundColor: emergencyType === type.id ? "#fef2f2" : "white",
+                              color: emergencyType === type.id ? "#dc2626" : "#374151",
+                              fontSize: "0.9rem",
+                              fontWeight: "600",
+                              cursor: "pointer",
+                              transition: "all 0.2s",
+                              textAlign: "center",
+                            }}
+                            onMouseEnter={(e) => {
+                              if (emergencyType !== type.id) {
+                                e.target.style.borderColor = "#d1d5db"
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (emergencyType !== type.id) {
+                                e.target.style.borderColor = "#e5e7eb"
+                              }
+                            }}
+                        >
+                          {type.name}
+                        </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div style={{ marginBottom: "32px" }}>
+                  <label
+                      style={{
+                        display: "block",
+                        fontSize: "0.9rem",
+                        fontWeight: "600",
+                        color: "#374151",
+                        marginBottom: "8px",
+                      }}
+                  >
+                    Description of Emergency *
+                  </label>
+                  <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      rows={4}
+                      placeholder="Please describe what happened, symptoms, or situation..."
+                      required
+                      style={{
+                        width: "100%",
+                        padding: "12px 16px",
+                        border: "1px solid #d1d5db",
+                        borderRadius: "8px",
+                        fontSize: "1rem",
+                        outline: "none",
+                        resize: "vertical",
+                        fontFamily: "inherit",
+                        transition: "border-color 0.2s, box-shadow 0.2s",
+                        boxSizing: "border-box",
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "#dc2626"
+                        e.target.style.boxShadow = "0 0 0 3px rgba(220, 38, 38, 0.1)"
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "#d1d5db"
+                        e.target.style.boxShadow = "none"
+                      }}
+                  />
+                </div>
+
+                {/* Location Status */}
+                <div
+                    style={{
+                      backgroundColor: "#eff6ff",
+                      borderRadius: "8px",
+                      padding: "20px",
+                      marginBottom: "32px",
+                      border: "1px solid #bfdbfe",
+                    }}
+                >
+                  <h3
+                      style={{
+                        fontSize: "0.9rem",
+                        fontWeight: "600",
+                        color: "#1e40af",
+                        marginBottom: "12px",
+                      }}
+                  >
+                    📍 Location Status
+                  </h3>
+                  {location ? (
+                      <div style={{ fontSize: "0.9rem", color: "#1e40af" }}>
+                        <p style={{ margin: "0 0 8px 0" }}>
+                          ✅ Location detected (Accuracy: ~{Math.round(location.accuracy)}m)
+                        </p>
+                        <p
+                            style={{
+                              fontSize: "0.8rem",
+                              color: "#3b82f6",
+                              margin: "0",
+                            }}
+                        >
+                          Lat: {location.latitude.toFixed(6)}, Lng: {location.longitude.toFixed(6)}
+                        </p>
+                      </div>
+                  ) : (
+                      <div style={{ fontSize: "0.9rem", color: "#d97706" }}>
+                        <p style={{ margin: "0 0 8px 0" }}>⚠️ Location not available</p>
+                        <button
+                            type="button"
+                            onClick={getCurrentLocation}
+                            style={{
+                              color: "#2196f3",
+                              textDecoration: "underline",
+                              background: "none",
+                              border: "none",
+                              cursor: "pointer",
+                              fontSize: "0.9rem",
+                            }}
+                        >
+                          Try to get location again
+                        </button>
+                      </div>
+                  )}
+                </div>
+
+                {/* User Information Display */}
+                {user && (
+                    <div
+                        style={{
+                          backgroundColor: "#f8f9fa",
+                          borderRadius: "8px",
+                          padding: "20px",
+                          marginBottom: "32px",
+                          border: "1px solid #e5e7eb",
+                        }}
+                    >
+                      <h3
+                          style={{
+                            fontSize: "0.9rem",
+                            fontWeight: "600",
+                            color: "#222",
+                            marginBottom: "16px",
+                          }}
+                      >
+                        Your Information (will be shared)
+                      </h3>
+                      <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                            gap: "16px",
+                            fontSize: "0.9rem",
+                          }}
+                      >
+                        <div>
+                          <span style={{ fontWeight: "600" }}>Name:</span> {user.firstName} {user.lastName}
+                        </div>
+                        <div>
+                          <span style={{ fontWeight: "600" }}>Phone:</span> {user.phone || "Not provided"}
+                        </div>
+                        <div>
+                          <span style={{ fontWeight: "600" }}>Blood Type:</span> {user.bloodType || "Unknown"}
+                        </div>
+                        <div>
+                          <span style={{ fontWeight: "600" }}>Allergies:</span> {user.allergies || "None listed"}
+                        </div>
+                      </div>
+                    </div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                    type="submit"
+                    disabled={!emergencyType || !description || isSubmitting}
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#dc2626",
+                      color: "white",
+                      padding: "16px 24px",
+                      borderRadius: "8px",
+                      border: "none",
+                      fontSize: "1.1rem",
+                      fontWeight: "600",
+                      cursor: !emergencyType || !description || isSubmitting ? "not-allowed" : "pointer",
+                      opacity: !emergencyType || !description || isSubmitting ? "0.5" : "1",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (emergencyType && description && !isSubmitting) {
+                        e.target.style.backgroundColor = "#b91c1c"
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (emergencyType && description && !isSubmitting) {
+                        e.target.style.backgroundColor = "#dc2626"
+                      }
+                    }}
+                >
+                  {isSubmitting ? "Sending Alert..." : "Send Detailed Emergency Alert"}
+                </button>
+              </form>
+
+              {/* Emergency Contacts */}
+              <div
+                  style={{
+                    marginTop: "48px",
+                    paddingTop: "32px",
+                    borderTop: "1px solid #e5e7eb",
+                  }}
+              >
+                <h3
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "24px",
+                    }}
+                >
+                  Emergency Contacts
+                </h3>
+                <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                      gap: "16px",
+                    }}
+                >
+                  <div
+                      style={{
+                        textAlign: "center",
+                        padding: "24px 16px",
+                        backgroundColor: "#fef2f2",
+                        borderRadius: "8px",
+                        border: "1px solid #fecaca",
+                      }}
+                  >
+                    <div style={{ fontSize: "2rem", marginBottom: "8px" }}>🚑</div>
+                    <p style={{ fontWeight: "600", margin: "0 0 4px 0" }}>Emergency Services</p>
+                    <p
+                        style={{
+                          fontSize: "1.2rem",
+                          fontWeight: "bold",
+                          color: "#dc2626",
+                          margin: "0",
+                        }}
+                    >
+                      911
+                    </p>
+                  </div>
+                  <div
+                      style={{
+                        textAlign: "center",
+                        padding: "24px 16px",
+                        backgroundColor: "#eff6ff",
+                        borderRadius: "8px",
+                        border: "1px solid #bfdbfe",
+                      }}
+                  >
+                    <div style={{ fontSize: "2rem", marginBottom: "8px" }}>☠️</div>
+                    <p style={{ fontWeight: "600", margin: "0 0 4px 0" }}>Poison Control</p>
+                    <p
+                        style={{
+                          fontSize: "1.2rem",
+                          fontWeight: "bold",
+                          color: "#2563eb",
+                          margin: "0",
+                        }}
+                    >
+                      1-800-222-1222
+                    </p>
+                  </div>
+                  <div
+                      style={{
+                        textAlign: "center",
+                        padding: "24px 16px",
+                        backgroundColor: "#f0fdf4",
+                        borderRadius: "8px",
+                        border: "1px solid #bbf7d0",
+                      }}
+                  >
+                    <div style={{ fontSize: "2rem", marginBottom: "8px" }}>🧠</div>
+                    <p style={{ fontWeight: "600", margin: "0 0 4px 0" }}>Crisis Hotline</p>
+                    <p
+                        style={{
+                          fontSize: "1.2rem",
+                          fontWeight: "bold",
+                          color: "#16a34a",
+                          margin: "0",
+                        }}
+                    >
+                      988
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </main>
       </div>
-    </div>
-  );
-};
-
-export default EmergencyReport;
+  )
+}

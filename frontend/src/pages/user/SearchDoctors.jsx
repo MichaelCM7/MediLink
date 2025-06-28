@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -241,14 +242,14 @@ const SearchDoctors = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
+        {/!* Header *!/}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Find Doctors</h1>
           <p className="text-gray-600">Search and connect with healthcare professionals</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
+          {/!* Filters Sidebar *!/}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow p-6 sticky top-4">
               <div className="flex justify-between items-center mb-4">
@@ -261,7 +262,7 @@ const SearchDoctors = () => {
                 </button>
               </div>
 
-              {/* Search */}
+              {/!* Search *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Search
@@ -275,7 +276,7 @@ const SearchDoctors = () => {
                 />
               </div>
 
-              {/* Specialty Filter */}
+              {/!* Specialty Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Specialty
@@ -292,7 +293,7 @@ const SearchDoctors = () => {
                 </select>
               </div>
 
-              {/* Location Filter */}
+              {/!* Location Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Location
@@ -306,7 +307,7 @@ const SearchDoctors = () => {
                 />
               </div>
 
-              {/* Insurance Filter */}
+              {/!* Insurance Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Insurance
@@ -323,7 +324,7 @@ const SearchDoctors = () => {
                 </select>
               </div>
 
-              {/* Rating Filter */}
+              {/!* Rating Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Minimum Rating
@@ -340,7 +341,7 @@ const SearchDoctors = () => {
                 </select>
               </div>
 
-              {/* Gender Filter */}
+              {/!* Gender Filter *!/}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Gender
@@ -358,9 +359,9 @@ const SearchDoctors = () => {
             </div>
           </div>
 
-          {/* Results */}
+          {/!* Results *!/}
           <div className="lg:col-span-3">
-            {/* Sort and Results Count */}
+            {/!* Sort and Results Count *!/}
             <div className="flex justify-between items-center mb-6">
               <p className="text-gray-600">
                 {filteredDoctors.length} doctors found
@@ -377,7 +378,7 @@ const SearchDoctors = () => {
               </select>
             </div>
 
-            {/* Doctor Cards */}
+            {/!* Doctor Cards *!/}
             {filteredDoctors.length === 0 ? (
               <div className="text-center py-12">
                 <div className="text-4xl mb-4">🔍</div>
@@ -389,14 +390,14 @@ const SearchDoctors = () => {
                 {filteredDoctors.map((doctor) => (
                   <div key={doctor.id} className="bg-white rounded-lg shadow p-6">
                     <div className="flex flex-col md:flex-row md:items-start md:space-x-6">
-                      {/* Doctor Image */}
+                      {/!* Doctor Image *!/}
                       <div className="flex-shrink-0 mb-4 md:mb-0">
                         <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center">
                           <span className="text-2xl">👨‍⚕️</span>
                         </div>
                       </div>
 
-                      {/* Doctor Info */}
+                      {/!* Doctor Info *!/}
                       <div className="flex-1">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between">
                           <div className="flex-1">
@@ -429,7 +430,7 @@ const SearchDoctors = () => {
                             </div>
                           </div>
 
-                          {/* Action Panel */}
+                          {/!* Action Panel *!/}
                           <div className="mt-4 md:mt-0 md:ml-6 flex flex-col items-end space-y-2">
                             <span className={`px-3 py-1 rounded-full text-xs font-medium ${getAvailabilityColor(doctor.availability)}`}>
                               {doctor.availability}
@@ -451,7 +452,7 @@ const SearchDoctors = () => {
                           </div>
                         </div>
 
-                        {/* Insurance Info */}
+                        {/!* Insurance Info *!/}
                         <div className="mt-4 pt-4 border-t border-gray-200">
                           <p className="text-sm text-gray-600">
                             <span className="font-medium">Accepts:</span> {doctor.insurance.join(', ')}
@@ -470,4 +471,4 @@ const SearchDoctors = () => {
   );
 };
 
-export default SearchDoctors;
+export default SearchDoctors;*/
