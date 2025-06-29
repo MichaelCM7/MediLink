@@ -38,7 +38,8 @@ export const ROUTES = {
     ADMIN_SIGNUP: '/admin/signup',
     DASHBOARD: '/dashboard',
     PROFILE: '/profile',
-    EMERGENCY: '/emergency',
+    EMERGENCY: '/emergencyReport',
+    OUR_SERVICES: '/ourServices',
     ABOUT: '/about',
     // ...add other routes as needed
 };

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {ROUTES} from "../../utils/constant.js";
 import React from "react";
 
-const UserAbout = () => {
+const DoctorAbout = () => {
     const values = [
         {
             icon: "❤️",
@@ -39,20 +39,17 @@ const UserAbout = () => {
                 </div>
 
                 <nav className="homepage-nav">
-                    <Link to={ROUTES.USER_DASHBOARD} style={{ color: "#222", fontWeight: "600" }}>
-                        Home
+                    <Link to={ROUTES.DOCTOR_DASHBOARD}>Home</Link>
+                    <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} style={{ color: "#222", fontWeight: "600" }}>
+                        Manage appointments
                     </Link>
-                    <Link to={ROUTES.USER_SERVICES}>Services</Link>
-                    <Link to={ROUTES.USER_REVIEWS}>Ratings & Review</Link>
-                    <Link to={ROUTES.USER_APPOINTMENT_HISTORY}>History</Link>
-                    <Link to={ROUTES.USER_ABOUT}>About</Link>
-                    <Link to={ROUTES.USER_EMERGENCY} style={{ color: "#f44336" }}>
-                        Report Emergency
-                    </Link>
+                    <Link to={ROUTES.DOCTOR_PATIENT_HISTORY}>Patient records</Link>
+                    <Link to={ROUTES.DOCTOR_RATINGS}>Monitor ratings</Link>
+                    <Link to={ROUTES.DOCTOR_ABOUT}>About Us</Link>
                 </nav>
 
                 <div className="homepage-nav">
-                    <Link to={ROUTES.USER_PROFILE} className="homepage-Sign-Up-btn">
+                    <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
                         <button
                             style={{
                                 background: "transparent",
@@ -68,7 +65,7 @@ const UserAbout = () => {
                     <Link to={ROUTES.USER_LOGIN}>
                         <button className="homepage-login-btn, margin-left:0;">Logout</button>
                     </Link>
-                    <Link to={ROUTES.USER_SETTINGS}>
+                    <Link to={ROUTES.DOCTOR_SETTINGS}>
                         <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
                             <img src="/settings-icon.png" alt="settings butoon" />
                         </div>
@@ -315,11 +312,10 @@ const UserAbout = () => {
                             </button>
                         </Link>
                     </div>
-
                 </div>
             </main>
         </div>
     )
 }
 
-export default UserAbout
+export default DoctorAbout

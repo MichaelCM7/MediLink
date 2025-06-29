@@ -21,6 +21,7 @@ import MedicalReport from "./pages/user/MedicalHistory.jsx";
 import UserAbout from "./pages/user/userAbout.jsx";
 import EmergencyReport from './pages/user/EmergencyReport';
 import About from "./pages/common/About.jsx";
+import DoctorAbout from "./pages/doctor/DoctorAbout.jsx";
 import HomePage from "./pages/common/HomePage";
 import './styles/global.css';
 import AdminSettings from "./pages/admin/SystemSettings.jsx";
@@ -30,6 +31,8 @@ import EmergencyAlerts from "./pages/admin/EmergencyAlerts.jsx";
 import HospitalRatings from "./pages/admin/RatingsOverview.jsx";
 import AdminProfile from "./pages/admin/AdminProfile.jsx";
 import UserManagement from "./pages/admin/UserManagement.jsx";
+import GeneralEmergencyReport from "./pages/common/EmergencyReport.jsx";
+import OurServices from "./pages/common/OurServices.jsx";
 
 
 const App = () => {
@@ -50,7 +53,7 @@ const App = () => {
                 <Route path="/user/userAbout" element={<UserAbout />} />
                 <Route path="/doctor/login" element={<DoctorLogin />} />
                 <Route path="/doctor/signup" element={<DoctorSignup />} />
-                <Route path="/doctor/About" element={<About />} />
+                <Route path="/doctor/About" element={<DoctorAbout />} />
                 <Route path="/doctor/patientHistory/patientDetails" element={<PatientDetails />}/>
                 <Route path="/doctor/patientHistory" element={<PatientRecords />}/>
                 <Route path="/doctor/manageAppointments" element={<ManageAppointments />} />
@@ -65,7 +68,10 @@ const App = () => {
                 <Route path="/admin/ratings" element={<HospitalRatings />} />
                 <Route path="/admin/profile" element={<AdminProfile />} />
                 <Route path="/admin/userManagement" element={<UserManagement />} />
-                <Route path="" element={<HomePage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/emergencyReport" element={<GeneralEmergencyReport />} />
+                <Route path="/ourServices" element={<OurServices />} />
+                <Route path="/about" element={<About />} />
                 <Route path="*" element={<div>Page Not Found</div>} />
             </Routes>
         </BrowserRouter>

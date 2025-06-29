@@ -38,39 +38,29 @@ const About = () => {
             <span className="homepage-logo-text">MEDILINK</span>
           </div>
 
-          <nav className="homepage-nav">
-            <Link to={ROUTES.DOCTOR_DASHBOARD}>Home</Link>
-            <Link to={ROUTES.DOCTOR_PATIENT_REQUESTS} style={{ color: "#222", fontWeight: "600" }}>
-              Manage appointments
-            </Link>
-            <Link to={ROUTES.DOCTOR_PATIENT_HISTORY}>Patient records</Link>
-            <Link to={ROUTES.DOCTOR_RATINGS}>Monitor ratings</Link>
-            <Link to={ROUTES.DOCTOR_ABOUT}>About Us</Link>
-          </nav>
+            <nav className="homepage-nav">
+                <Link to={ROUTES.HOME} className="hover:text-blue-600">Home</Link>
+                <Link to={ROUTES.OUR_SERVICES} className="hover:text-blue-600">Our Services</Link>
+                <Link to={ROUTES.EMERGENCY} className="hover:text-blue-600">Emergency Report</Link>
+                <Link to={ROUTES.ABOUT} className="hover:text-blue-600">About Us</Link>
+            </nav>
 
-          <div className="homepage-nav">
-            <Link to={ROUTES.DOCTOR_PROFILE} className="homepage-Sign-Up-btn">
-              <button
-                  style={{
-                    background: "transparent",
-                    color: "#222",
-                    border: "1px solid #ddd",
-                    padding: "11.5px 20px",
-                    fontSize: "1rem",
-                  }}
-              >
-                Profile
-              </button>
-            </Link>
-            <Link to={ROUTES.USER_LOGIN}>
-              <button className="homepage-login-btn, margin-left:0;">Logout</button>
-            </Link>
-            <Link to={ROUTES.DOCTOR_SETTINGS}>
-              <div style={{ width: "32px", height: "32px", color: "#666",cursor: "pointer" }}>
-                <img src="/settings-icon.png" alt="settings butoon" />
-              </div>
-            </Link>
-          </div>
+            <div className="homepage-nav">
+                <Link to={ROUTES.USER_SIGNUP} className="homepage-Sign-Up-btn">
+                    <button style={{
+                        background: "transparent",
+                        color: "#222",
+                        border: "1px solid #ddd",
+                        padding: "11.5px 20px",
+                        fontSize: "1rem",
+                    }}>
+                        Sign Up
+                    </button>
+                </Link>
+                <Link to={ROUTES.USER_LOGIN}>
+                    <button className="homepage-login-btn, margin-left:0;">Login</button>
+                </Link>
+            </div>
         </header>
 
         {/* Main Content */}
@@ -298,19 +288,20 @@ const About = () => {
               display: "flex",
               justifyContent: "center",
             }}>
-              <button
-                  className="homepage-hero-actions primary"
-                  style={{
-                    fontSize: "1.1rem",
-                    padding: "16px 32px",
-                    textAlign: "center",
-                    width: "20%",
-                  }}
-              >
-                Get Started Today
-              </button>
+                <><Link to={ROUTES.USER_SIGNUP}>
+                    <button
+                        className="homepage-hero-actions primary"
+                        style={{
+                            fontSize: "1.1rem",
+                            padding: "16px 32px",
+                            textAlign: "center",
+                            width: "100%",
+                        }}
+                    >
+                        Get Started Today
+                    </button>
+                </Link></>
             </div>
-
           </div>
         </main>
       </div>

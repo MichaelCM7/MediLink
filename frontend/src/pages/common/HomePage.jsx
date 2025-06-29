@@ -11,22 +11,28 @@ const HomePage = () => (
         <span className="homepage-logo-text">MEDILINK</span>
       </div>
       <nav className="homepage-nav">
-        <a href="#" className="hover:text-blue-600">Services</a>
-        <a href="#" className="hover:text-blue-600">Join us</a>
-        <a href="#" className="hover:text-blue-600">About Us</a>
-        <Link
-          to={ROUTES.USER_SIGNUP}
-          className="homepage-Sign-Up-btn"
-        >
-          Sign-Up
-        </Link>
-        <Link
-          to={ROUTES.USER_LOGIN}
-          className="homepage-login-btn"
-        >
-          Login
-        </Link>
+        <Link to={ROUTES.HOME} className="hover:text-blue-600">Home</Link>
+        <Link to={ROUTES.OUR_SERVICES} className="hover:text-blue-600">Our Services</Link>
+        <Link to={ROUTES.EMERGENCY} className="hover:text-blue-600">Emergency Report</Link>
+        <Link to={ROUTES.ABOUT} className="hover:text-blue-600">About Us</Link>
       </nav>
+
+      <div className="homepage-nav">
+        <Link to={ROUTES.USER_SIGNUP} className="homepage-Sign-Up-btn">
+          <button style={{
+            background: "transparent",
+            color: "#222",
+            border: "1px solid #ddd",
+            padding: "11.5px 20px",
+            fontSize: "1rem",
+          }}>
+            Sign Up
+          </button>
+        </Link>
+        <Link to={ROUTES.USER_LOGIN}>
+          <button className="homepage-login-btn, margin-left:0;">Login</button>
+        </Link>
+      </div>
     </header>
 
     {/* Hero Section */}
@@ -40,10 +46,10 @@ const HomePage = () => (
           Connect with trusted doctors and hospitals in Nairobi. Book appointments, access emergency services, and manage your healthcare journey with ease.
         </p>
         <div className="homepage-hero-actions">
-          <Link to="#" className="primary">
+          <Link to={ROUTES.EMERGENCY} className="primary">
             REQUEST AMBULANCE
           </Link>
-          <Link to="#" className="secondary">
+          <Link to={ROUTES.USER_LOGIN} className="secondary">
             Book Appointment
           </Link>
         </div>
