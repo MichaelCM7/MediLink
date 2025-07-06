@@ -1,20 +1,44 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // <-- Add this import
 import './DoctorLogin.css';
 
 const DoctorLogin = () => {
   const [formData, setFormData] = useState({
-    staffID: '',
+    email: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // <-- Add this line
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
+    setError('');
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/doctor/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (!response.ok) {
+        const msg = await response.text();
+        throw new Error(msg || 'Login failed');
+      }
+      const data = await response.json();
+      // Handle successful login (e.g., save token, redirect)
+      // localStorage.setItem('doctor', JSON.stringify(data)); // Optional: save doctor info
+      navigate('/doctor/dashboard'); // <-- Redirect to DoctorDashboard
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,14 +59,14 @@ const DoctorLogin = () => {
           <div className="login-card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label className="form-label" htmlFor="email">Staff ID</label>
+                <label className="form-label" htmlFor="email">Email</label>
                 <input
-                  id="staffID"
-                  name="staffID"
-                  type="staffID"
+                  id="email"
+                  name="email"
+                  type="email"
                   className="form-input"
-                  placeholder="Enter your staff ID"
-                  value={formData.staffID}
+                  placeholder="Enter your email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
                 />
@@ -60,12 +84,15 @@ const DoctorLogin = () => {
                   required
                 />
               </div>
-              <button type="submit" className="btn-primary">Login</button>
+              {error && <div className="error-message">{error}</div>}
+              <button type="submit" className="btn-primary" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
+              </button>
             </form>
             <div className="login-footer">
               <p>
                 Don't have an account?{' '}
-                <a href="/doctor/login" className="doctor-link">Sign Up</a>
+                <a href="/doctor/signup" className="doctor-link">Sign Up</a>
               </p>
               <p>
                 Are you a doctor?{' '}
