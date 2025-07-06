@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { ROUTES, USER_ROLES } from '../../utils/constant';
 import './UserLogin.css';
 
 const UserLogin = () => {
@@ -7,14 +10,22 @@ const UserLogin = () => {
     password: ''
   });
 
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
+    const result = await login(formData, USER_ROLES.PATIENT);
+    if (result.success) {
+      navigate(ROUTES.USER_DASHBOARD);
+    } else {
+      alert(result.error || "Login failed. Please try again.");
+    }
   };
 
   return (

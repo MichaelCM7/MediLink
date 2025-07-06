@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Heart, Hospital, Mail, Phone } from 'lucide-react';
+import { Eye, EyeOff, Heart } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES, USER_ROLES } from '../../utils/constant';
 import { validateForm } from '../../utils/validators';
@@ -9,12 +9,15 @@ import './DoctorSignUp.css';
 
 const DoctorSignup = () => {
   const [formData, setFormData] = useState({
-    fullname: '',
-    staffID: '',
-    Hospital: '',
-    specialization: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    specialisation: '',
+    hospitalName: '',
+    agreedToTerms: false
   });
 
   const [errors, setErrors] = useState({});
@@ -27,10 +30,10 @@ const DoctorSignup = () => {
 
   // Validation rules
   const validationRules = {
-    fullname: [{ type: 'required' }],
-    staffID: [{ type: 'required' }],
-    Hospital: [{ type: 'required' }],
-    specialization: [{ type: 'required' }],
+    firstName: [{ type: 'required' }],
+    lastName: [{ type: 'required' }],
+    email: [{ type: 'required' }, { type: 'email' }],
+    phone: [{ type: 'required' }],
     password: [{ type: 'required' }, { type: 'password' }],
     confirmPassword: [
       { type: 'required' },
@@ -42,6 +45,14 @@ const DoctorSignup = () => {
           }
           return null;
         }
+      }
+    ],
+    specialisation: [{ type: 'required' }],
+    hospitalName: [{ type: 'required' }],
+    agreedToTerms: [
+      {
+        type: 'custom',
+        validator: (value) => value ? null : 'You must agree to the terms.'
       }
     ]
   };
@@ -74,13 +85,23 @@ const DoctorSignup = () => {
 
     setIsLoading(true);
 
+    // Only send the fields your backend expects
+    const submitData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      password: formData.password,
+      specialisation: formData.specialisation,
+      hospitalName: formData.hospitalName
+    };
+
     try {
-      const result = await register(formData, USER_ROLES.PATIENT);
+      const result = await register(submitData, USER_ROLES.DOCTOR);
 
       if (result.success) {
-        // Show success message and redirect to login
         alert('Registration successful! Please check your email to verify your account.');
-        navigate(ROUTES.DOCTOR_SIGNUP);
+        navigate(ROUTES.DOCTOR_LOGIN);
       } else {
         setErrors({ submit: result.error || 'Registration failed. Please try again.' });
       }
@@ -115,56 +136,52 @@ const DoctorSignup = () => {
             )}
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label className="form-label">FullName *</label>
+                <label className="form-label">First Name *</label>
                 <input
                   type="text"
-                  name="fullname"
-                  value={formData.fullname}
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleInputChange}
-                  className={`form-input${errors.fullname ? ' error' : ''}`}
-                  placeholder="Enter your full name"
+                  className={`form-input${errors.firstName ? ' error' : ''}`}
+                  placeholder="Enter your first name"
                 />
-                {errors.fullname && <div className="form-error">{errors.fullname}</div>}
+                {errors.firstName && <div className="form-error">{errors.firstName}</div>}
               </div>
               <div className="form-group">
-                <label className="form-label">StaffID *</label>
+                <label className="form-label">Last Name *</label>
                 <input
                   type="text"
-                  name="staffID"
-                  value={formData.staffID}
+                  name="lastName"
+                  value={formData.lastName}
                   onChange={handleInputChange}
-                  className={`form-input${errors.staffID ? ' error' : ''}`}
-                  placeholder="Enter your staff ID"
+                  className={`form-input${errors.lastName ? ' error' : ''}`}
+                  placeholder="Enter your last name"
                 />
-                {errors.staffID && <div className="form-error">{errors.staffID}</div>}
+                {errors.lastName && <div className="form-error">{errors.lastName}</div>}
               </div>
               <div className="form-group">
-                <label className="form-label">Hospital *</label>
-                <div className="input-with-icon">
-                  <input
-                    type="text"
-                    name="Hospital"
-                    value={formData.Hospital}
-                    onChange={handleInputChange}
-                    className={`form-input${errors.Hospital ? ' error' : ''}`}
-                    placeholder="Enter your employed hospital"
-                  />
-                </div>
-                {errors.Hospital && <div className="form-error">{errors.Hospital}</div>}
+                <label className="form-label">Email *</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={`form-input${errors.email ? ' error' : ''}`}
+                  placeholder="Enter your email"
+                />
+                {errors.email && <div className="form-error">{errors.email}</div>}
               </div>
               <div className="form-group">
-                <label className="form-label">Specialization *</label>
-                <div className="input-with-icon">
-                  <input
-                    type="text"
-                    name="specialization"
-                    value={formData.specialization}
-                    onChange={handleInputChange}
-                    className={`form-input${errors.specialization ? ' error' : ''}`}
-                    placeholder="Enter your specialization"
-                  />
-                </div>
-                {errors.specialization && <div className="form-error">{errors.specialization}</div>}
+                <label className="form-label">Phone *</label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className={`form-input${errors.phone ? ' error' : ''}`}
+                  placeholder="Enter your phone number"
+                />
+                {errors.phone && <div className="form-error">{errors.phone}</div>}
               </div>
               <div className="form-group">
                 <label className="form-label">Password *</label>
@@ -207,6 +224,30 @@ const DoctorSignup = () => {
                   </button>
                 </div>
                 {errors.confirmPassword && <div className="form-error">{errors.confirmPassword}</div>}
+              </div>
+              <div className="form-group">
+                <label className="form-label">Specialisation *</label>
+                <input
+                  type="text"
+                  name="specialisation"
+                  value={formData.specialisation}
+                  onChange={handleInputChange}
+                  className={`form-input${errors.specialisation ? ' error' : ''}`}
+                  placeholder="Enter your specialisation"
+                />
+                {errors.specialisation && <div className="form-error">{errors.specialisation}</div>}
+              </div>
+              <div className="form-group">
+                <label className="form-label">Hospital Name *</label>
+                <input
+                  type="text"
+                  name="hospitalName"
+                  value={formData.hospitalName}
+                  onChange={handleInputChange}
+                  className={`form-input${errors.hospitalName ? ' error' : ''}`}
+                  placeholder="Enter your hospital name"
+                />
+                {errors.hospitalName && <div className="form-error">{errors.hospitalName}</div>}
               </div>
               <div className="form-group" style={{ marginBottom: 12 }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>

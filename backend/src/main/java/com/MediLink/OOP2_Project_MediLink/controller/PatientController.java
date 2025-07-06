@@ -16,13 +16,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auth/patients")
 public class PatientController {
 
     @Autowired
     private PatientRepository patientRepository;
 
-    @PostMapping("/register/patients")
+    @PostMapping("/register")
     public ResponseEntity<?> registerPatient(@Valid @RequestBody PatientRequestDTO request) {
         try {
             Patient patient = PatientMapper.toEntity(request);
@@ -55,7 +55,7 @@ public class PatientController {
         patientRepository.deleteById(id);
     }
 
-    @PostMapping("/login/patients")
+    @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
         String password = credentials.get("password");

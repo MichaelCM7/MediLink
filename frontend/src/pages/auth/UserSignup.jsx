@@ -12,6 +12,7 @@ const UserSignup = () => {
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   });
@@ -152,6 +153,19 @@ const UserSignup = () => {
                 {errors.email && <div className="form-error">{errors.email}</div>}
               </div>
               <div className="form-group">
+                <label className="form-label" htmlFor="phone">Phone Number</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  className="form-input"
+                  placeholder="Enter your phone number"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
                 <label className="form-label">Password *</label>
                 <div className="input-with-toggle">
                   <input
@@ -172,6 +186,7 @@ const UserSignup = () => {
                 </div>
                 {errors.password && <div className="form-error">{errors.password}</div>}
               </div>
+              
               <div className="form-group">
                 <label className="form-label">Confirm Password *</label>
                 <div className="input-with-toggle">

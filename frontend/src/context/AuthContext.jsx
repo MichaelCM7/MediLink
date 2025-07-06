@@ -124,43 +124,12 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: AUTH_ACTIONS.LOGIN_START });
 
-      let response;
-      switch (role) {
-        case USER_ROLES.PATIENT:
-          response = await authAPI.loginUser(credentials);
-          break;
-        case USER_ROLES.DOCTOR:
-          response = await authAPI.loginDoctor(credentials);
-          break;
-        case USER_ROLES.ADMIN:
-          response = await authAPI.loginAdmin(credentials);
-          break;
-        default:
-          throw new Error('Invalid role specified');
-      }
-
-      const { token, user } = response.data;
-
-      // Store token and user data
-      localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
-      localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(user));
-
-      dispatch({
-        type: AUTH_ACTIONS.LOGIN_SUCCESS,
-        payload: {
-          user,
-          role: user.role
-        }
-      });
-
-      return { success: true, user };
+      const response = await authAPI.loginUser(credentials);
+      // If login is successful, response.status is 200
+      // You may need to adjust this depending on your backend's response
+      return { success: true, data: response.data };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Login failed';
-      dispatch({
-        type: AUTH_ACTIONS.LOGIN_FAILURE,
-        payload: errorMessage
-      });
-      return { success: false, error: errorMessage };
+      return { success: false, error: error.response?.data?.message || 'Login failed' };
     }
   };
 

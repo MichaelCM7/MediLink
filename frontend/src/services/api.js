@@ -44,22 +44,22 @@ api.interceptors.response.use(
 // Auth API endpoints
 export const authAPI = {
   // User registration
-  registerUser: (userData) => api.post('/auth/register/patients', userData),
+  registerUser: (userData) => api.post('/auth/patients/register', userData),
   
   // Doctor registration
-  registerDoctor: (doctorData) => api.post('/auth/register/doctor', doctorData),
+  registerDoctor: (doctorData) => api.post('/auth/doctor/register', doctorData),
   
   // Admin registration
-  registerAdmin: (adminData) => api.post('/auth/register/admin', adminData),
+  registerAdmin: (adminData) => api.post('/auth/admin/register', adminData),
   
   // User login
-  loginUser: (credentials) => api.post('/auth/login/patients', credentials),
+  loginUser: (credentials) => api.post('/auth/patients/login', credentials),
   
   // Doctor login
-  loginDoctor: (credentials) => api.post('/auth/login/doctor', credentials),
+  loginDoctor: (credentials) => api.post('/auth/doctor/login', credentials),
   
   // Admin login
-  loginAdmin: (credentials) => api.post('/auth/login/admin', credentials),
+  loginAdmin: (credentials) => api.post('/auth/admin/login', credentials),
   
   // Logout
   logout: () => api.post('/auth/logout'),
