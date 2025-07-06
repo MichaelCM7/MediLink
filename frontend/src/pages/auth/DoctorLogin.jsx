@@ -9,7 +9,7 @@ const DoctorLogin = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // <-- Add this line
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,9 +31,7 @@ const DoctorLogin = () => {
         throw new Error(msg || 'Login failed');
       }
       const data = await response.json();
-      // Handle successful login (e.g., save token, redirect)
-      // localStorage.setItem('doctor', JSON.stringify(data)); // Optional: save doctor info
-      navigate('/doctor/dashboard'); // <-- Redirect to DoctorDashboard
+      navigate('/doctor/dashboard'); 
     } catch (err) {
       setError(err.message);
     } finally {

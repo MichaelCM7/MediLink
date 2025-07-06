@@ -99,7 +99,7 @@ const UserSignup = () => {
           <div className="signup-header">
             <Link to={ROUTES.HOME} className="logo-link">
               <div className="logo-icon">
-                <Heart size={28} color="#fff" style={{ background: "#2196f3", borderRadius: 8, padding: 4 }} />
+                <img src="/MediLink.png" alt="MediLink Logo" width={32} height={32} />
               </div>
               <span className="logo-text">Medi-Link</span>
             </Link>
