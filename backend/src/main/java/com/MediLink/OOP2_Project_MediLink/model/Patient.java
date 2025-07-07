@@ -14,6 +14,15 @@ public class Patient extends User {
         super(firstName, lastName, email, phone, password, null);
     }
 
+    public Patient(String firstName, String lastName, String email, String phone, String password, String description) {
+        super(firstName, lastName, email, phone, password, description); // Call User constructor
+    }
+
+    public Patient(String patientId, String firstName, String lastName, String email, String phone, String password, String description) {
+        super(firstName, lastName, email, phone, password, description); // Call User constructor
+        this.patientId = patientId;
+    }
+
     public String getPatientId() {
         return patientId;
     }

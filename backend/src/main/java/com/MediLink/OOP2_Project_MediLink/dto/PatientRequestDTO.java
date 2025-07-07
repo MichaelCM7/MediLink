@@ -23,6 +23,15 @@ public class PatientRequestDTO {
 
     private String description;
 
+    public PatientRequestDTO(String firstName, String lastName, String email, String phone, String password, String description) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.description = description;
+    }
+
     // Getters and Setters
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
