@@ -59,6 +59,6 @@ Once both servers are running, you can explore MediLink through the logged-out i
 
 - Java (Spring Boot)
 - Maven
-- Node.js
+- Mongo DB Atlas
 - React
 - Vite
